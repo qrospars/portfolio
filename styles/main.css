@@ -1,0 +1,251 @@
+/* FONTS */
+
+@font-face {
+    font-family: "Brandon Grotesque Black";
+    src: url("Brandon_Grotesque/Brandon_blk.otf");
+}
+@font-face {
+    font-family: "Brandon Grotesque Bold";
+    src: url("Brandon_Grotesque/Brandon_bld.otf");
+}
+@font-face {
+    font-family: "Brandon Grotesque Medium";
+    src: url("Brandon_Grotesque/Brandon_med.otf");
+}
+@font-face {
+    font-family: "Brandon Grotesque Regular";
+    src: url("Brandon_Grotesque/Brandon_reg.otf");
+}
+@font-face {
+    font-family: "Brandon Grotesque Light";
+    src: url("Brandon_Grotesque/Brandon_light.otf");
+}
+@font-face {
+    font-family: "Brandon Grotesque Thin";
+    src: url("Brandon_Grotesque/Brandon_thin.otf");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    background: #f9f8fa;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: inherit;
+    outline: 0;
+}
+img {
+    width: 100%;
+}
+
+/* HOME */
+
+.home {
+    position: fixed;
+    z-index: 999;
+    top: 50px;
+    left: 50px;
+}
+.home-icon {
+    color: #323232;
+    font-size: 3rem;
+    transition-duration: 0.5s;
+}
+/* MENU */
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.menu-wrapper {
+    position: relative;
+    max-width: 80%;
+    height: 100%;
+    margin: auto;
+}
+.presentation {
+    padding: 150px 0 0 50px;
+    width: 800px;
+}
+.presentation-text {
+    font-family: "Brandon Grotesque Medium";
+    font-size: 8rem;
+}
+.menu {
+    position: absolute;
+    text-align: center;
+    display: block;
+    left:0;
+    right: 0;
+    bottom: 5%;
+}
+.menu-list {
+    padding: 0;
+    font-size: 0;
+}
+.menu-list-item {
+    border-bottom: 2px solid #3c3f41;
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-bottom: 3px;
+    color: #323232;
+    font-size: 1.7rem;
+    font-family: "Brandon Grotesque Light";
+    text-transform: uppercase;
+}
+.menu-list-item a {
+    color: #323232;
+    text-decoration: none;
+}
+.menu-list-item a:hover {
+    color: #5574d5;
+    transition-duration: 500ms;
+}
+.menu-icon {
+    padding-top: 100px;
+    margin-top: 20px;
+}
+.menu-icon-arrow {
+    display: inline-block;
+    font-size: 3rem;
+    color: #323232;
+    width: 100px;
+
+}
+
+/* WORK */
+
+.work {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background: #323232;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width:100%;
+    box-sizing: border-box;
+}
+.work-grid {
+    position: absolute;
+    overflow: hidden;
+    top:50%;
+    transform: translateY(-50%);
+}
+#work-grid-item-2 img {
+
+    transition: .2s ease-in-out;
+}
+.work-grid-list {
+    padding:0;
+    margin: 0;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: center;
+    overflow: hidden;
+    width:3000px;
+    transform: translateX(-200px);
+}
+.work-grid-list-item {
+    width:676px;
+    height:368px;
+    margin: 0 50px 0 50px;
+    display: inline-block;
+    transition: .2s ease-in-out;
+
+}
+.work-grid-list-item-courant:hover {
+    transform: scale(1.2,1.2);
+}
+.work-grid-list-item:hover {
+    cursor: pointer;
+}
+.work-grid-list-item-courant {
+    transition-duration: 0.5s;
+}
+.work-grid-list-item:hover {
+    opacity: 0.5;
+}
+
+/* BLOG */
+
+.blog {
+    background: #f9f8fa;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-container {
+    position: absolute;
+    width:100%;
+    height:98%;
+}
+.blog-container-text {
+    padding-top: 200px;
+    color: #323232;
+    font-family: "Brandon Grotesque Medium";
+    font-size: 8rem;
+}
+
+/* ABOUT */
+
+.about {
+    position: absolute;
+    background: #323232;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.about-container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    position: absolute;
+    padding: 200px 200px 200px 200px;
+    margin: 0;
+    width: 100%;
+    height: 98%;
+}
+.about-text {
+    width: 500px;
+    font-size: 3em;
+    font-family: "Brandon Grotesque Light";
+    color: #f9f8fa;
+}
+.about-logos {
+    position: relative;
+    width: 600px;
+    padding-left: 200px;
+    color: #f9f8fa;
+    font-size: 3em;
+    top:50%;
+    transform: translateY(-50%);
+}
+.about-logos-container {
+    position: relative;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 100px;
+    top:50%;
+    transform: translateY(-50%);
+}
+.about-photo {
+    box-sizing: content-box;
+    width: 400px;
+}
