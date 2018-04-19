@@ -40,19 +40,16 @@ window.onload = function() {
     });
 
 
-    /** WORK **/
+    /** WORK GRID **/
     var cpt = -1;
     var imgs = [ "Abzu.png\"", "Cytoo.png\"", "Twitch.jpg\"", "Lappart.png\""];
-    var imgsLinks = ["https://www.youtube.com/watch?v=wJi0XXaHpKg",
-        "https://cytoo.com/",
-        "https://www.twitch.tv/miionu",
-        "https://soundcloud.com/miionu"];
+    var projects = ["'Abzu'", "'Cytoo'", "'Twitch'", "'Lappart'"];
     document.getElementById("js-work-grid-item-1").onclick = function() { // Decaler à gauche
         cpt = cpt - 1;
         for (i=1; i<=imgs.length;i++) {
             if (i == 2) { // Si l'element va etre celui du centre
-                document.getElementById("js-work-grid-item-"+i).innerHTML = "<a href=' "+ imgsLinks[mod((cpt+i),imgs.length)]
-                    + " ' target=\"_blank\"><img src=\"images/"+ imgs[mod((cpt+i),imgs.length)] +"></a>";
+                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick","addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
             }
             else {
                 document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
@@ -64,8 +61,8 @@ window.onload = function() {
         cpt = cpt + 1;
         for (i=1; i<=imgs.length;i++) {
             if (i == 2) { // Si l'element va etre celui du centre
-                document.getElementById("js-work-grid-item-"+i).innerHTML = "<a href=' "+ imgsLinks[mod((cpt+i),imgs.length)]
-                    + " ' target=\"_blank\"><img src=\"images/"+ imgs[mod((cpt+i),imgs.length)] +"></a>";
+                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick","addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
             }
             else {
                 document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
@@ -75,6 +72,35 @@ window.onload = function() {
 
 
 };
+
+// Gestion de l'overlay
+function addOverlay(projectName) {
+    switch(projectName) {
+        case 'Abzu':
+            break;
+        case 'Cytoo':
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Cytoo.html\"></div>";
+            w3IncludeHTML();
+            break;
+        case 'Twitch':
+            break;
+        case 'Lappart':
+            break;
+        default:
+            alert("Erreur");
+    }
+    document.getElementById("js-work-hover").style.transform = "translateX(30vw)";
+    document.getElementById("js-overlay").style.opacity = "0.8";
+    document.getElementById("js-overlay").style.zIndex = "999";
+    document.getElementById("js-body").style.overflow = "hidden";
+}
+
+function removeOverlay() {
+    document.getElementById("js-work-hover").style.transform = "translateX(100vw)";
+    document.getElementById("js-overlay").style.opacity = "0";
+    document.getElementById("js-overlay").style.zIndex = "-999";
+    document.getElementById("js-body").style.overflow = "visible";
+}
 
 // SLEEP Function
 function sleep(milliseconds) {
@@ -86,7 +112,7 @@ function sleep(milliseconds) {
     }
 }
 
-// FOnction Modulo qui gerre les nombres negatifs
+// Function modulo qui gerre les nombres negatifs
 function mod(n, m) {
     return ((n % m) + m) % m;
 }
