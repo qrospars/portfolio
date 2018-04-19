@@ -14,9 +14,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="scripts/main.js"></script>
-
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
-<body>
+<body id="js-body">
 <div id="page-0" class="content">
     <div class="home">
         <a class="js-scrollTo" href="#page-0">
@@ -56,10 +56,8 @@
                 <li id="js-work-grid-item-1" class="work-grid-list-item">
                     <img src="images/Abzu.png">
                 </li>
-                <li id="js-work-grid-item-2" class="work-grid-list-item work-grid-list-item-courant">
-                    <a href="https://cytoo.com/" target="_blank">
-                        <img src="images/Cytoo.png">
-                    </a>
+                <li id="js-work-grid-item-2" class="work-grid-list-item work-grid-list-item-courant" onclick="addOverlay('Cytoo')">
+                    <img src="images/Cytoo.png">
                 </li>
                 <li id="js-work-grid-item-3" class="work-grid-list-item">
                     <img src="images/Twitch.jpg">
@@ -69,11 +67,19 @@
                 </li>
             </ul>
         </div>
+        <div id="js-work-hover" class="work-hover">
+            <div id ="js-work-hover-text" class="work-hover-text">
+                <div w3-include-html="pages/projects_sumUp/Cytoo.html"></div>
+            </div>
+            <div class="work-hover-return" onclick="removeOverlay()">
+                <i class="fas fa-caret-right"></i>
+            </div>
+        </div>
     </div>
     <div id="page-2" class="blog">
         <div class="blog-container">
             <div class="blog-container-text">
-                <span>En Construction...</span>
+                <span>Blog en Construction...</span>
             </div>
             <div class="blog-container-image">
 
@@ -105,5 +111,12 @@
         </div>
     </div>
 </div>
+
+<!-- To include HTML contents -->
+<script>
+    w3IncludeHTML();
+</script>
+
+<div id="js-overlay" class="overlay" onclick="removeOverlay()"></div>
 </body>
 </html>
