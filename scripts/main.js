@@ -42,8 +42,8 @@ window.onload = function() {
 
     /** WORK GRID **/
     var cpt = -1;
-    var imgs = [ "Abzu.png\"", "Cytoo.png\"", "Twitch.jpg\"", "Lappart.png\""];
-    var projects = ["'Abzu'", "'Cytoo'", "'Twitch'", "'Lappart'"];
+    var imgs = ["Twitch.jpg\"", "Cytoo.png\"", "Lappart.png\""];
+    var projects = ["'Twitch'", "'Cytoo'", "'Lappart'"];
     document.getElementById("js-work-grid-item-1").onclick = function() { // Decaler à gauche
         cpt = cpt - 1;
         for (i=1; i<=imgs.length;i++) {
@@ -83,14 +83,18 @@ function addOverlay(projectName) {
             w3IncludeHTML();
             break;
         case 'Twitch':
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Twitch.html\"></div>";
+            w3IncludeHTML();
             break;
         case 'Lappart':
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Lappart.html\"></div>";
+            w3IncludeHTML();
             break;
         default:
             alert("Erreur");
     }
     document.getElementById("js-work-hover").style.transform = "translateX(30vw)";
-    document.getElementById("js-overlay").style.opacity = "0.8";
+    document.getElementById("js-overlay").style.opacity = "0.4";
     document.getElementById("js-overlay").style.zIndex = "999";
     document.getElementById("js-body").style.overflow = "hidden";
 }
