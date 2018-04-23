@@ -4,9 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/pages/projects_sumUp/Cytoo.html" line="11" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f85d8a58-b2ff-472b-b972-74cdb4b5d0b1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-    </list>
+    <list default="true" id="f85d8a58-b2ff-472b-b972-74cdb4b5d0b1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -219,16 +217,15 @@
       <workItem from="1523985996261" duration="299000" />
       <workItem from="1524145317856" duration="11309000" />
       <workItem from="1524217750404" duration="4533000" />
-      <workItem from="1524492418230" duration="1378000" />
+      <workItem from="1524492418230" duration="1977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17519000" />
+    <option name="totallyTimeSpent" value="18118000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.106770836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
