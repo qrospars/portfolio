@@ -130,8 +130,8 @@ img {
 /* WORK */
 
 .work {
-    display: block;
     overflow: hidden;
+    display: block;
     position: relative;
     background: #323232;
     padding: 0;
@@ -154,11 +154,10 @@ img {
     padding:0;
     margin: 0;
     display: inline-grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     align-items: center;
     overflow: hidden;
-    width:3000px;
-    transform: translateX(-200px);
+    transform: translateX(50vw) translateX(-1164px);
 }
 .work-grid-list-item {
     width:676px;
