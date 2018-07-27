@@ -42,8 +42,8 @@ window.onload = function() {
 
     /** WORK GRID **/
     var cpt = -1;
-    var imgs = ["Twitch.jpg\"", "Cytoo.png\"", "Lappart.png\""];
-    var projects = ["'Twitch'", "'Cytoo'", "'Lappart'"];
+    var imgs = ["Twitch.jpg\"", "Cytoo.png\"", "Artelia.jpg\"", "Lappart.png\""];
+    var projects = ["'Twitch'", "'Cytoo'","'Artelia'","'Lappart'"];
     document.getElementById("js-work-grid-item-1").onclick = function() { // Decaler à gauche
         cpt = cpt - 1;
         for (i=1; i<=imgs.length;i++) {
@@ -80,6 +80,10 @@ function addOverlay(projectName) {
             break;
         case 'Cytoo':
             document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Cytoo.html\"></div>";
+            includeHTML();
+            break;
+        case 'Artelia':
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Artelia.html\"></div>";
             includeHTML();
             break;
         case 'Twitch':
