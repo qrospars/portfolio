@@ -1,8 +1,11 @@
 var hauteur = 0;
 var ticking = false;
 var hauteur_total = window.innerHeight;
+var imageFullscreen = false;
 window.onload = function() {
-
+    
+    /* There is a better way to do the following: 
+    I have to create an element of the desired color for each panel. It would be much more smooth. */
     function changeColor(position_scroll) {
         if ((hauteur > 2.95 * hauteur_total) ||
             (hauteur < 1.95 * hauteur_total && hauteur > 0.95 * hauteur_total)) {
@@ -22,6 +25,19 @@ window.onload = function() {
             });
         }
         ticking = true;
+    });
+    document.getElementsByTagName("img").addEventListener('click', function(this) {
+        if(!imageFullscreen) {
+            this.position = fixed;
+            this.width = 100vw;
+            this.height = 100vh;
+        }
+        else {
+            this.position = relative;
+            this.width = "";
+            this.height = "";
+        }
+        imageFullscreen = !imageFullscreen
     });
 
     /* Script pour le "Smooth Scroll"
