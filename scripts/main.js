@@ -26,6 +26,7 @@ window.onload = function() {
         }
         ticking = true;
     });
+    /* TODO: add the followinf to each images, but only into the description panel. I can use class names for that 
     document.getElementsByTagName("img").addEventListener('click', function(this) {
         if(!imageFullscreen) {
             this.position = "fixed";
@@ -39,6 +40,7 @@ window.onload = function() {
         }
         imageFullscreen = !imageFullscreen
     });
+    */
 
     /* Script pour le "Smooth Scroll"
 
