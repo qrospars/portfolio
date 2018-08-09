@@ -28,12 +28,12 @@ window.onload = function() {
     });
     document.getElementsByTagName("img").addEventListener('click', function(this) {
         if(!imageFullscreen) {
-            this.position = fixed;
-            this.width = 100vw;
-            this.height = 100vh;
+            this.position = "fixed";
+            this.width = "100vw";
+            this.height = "100vh";
         }
         else {
-            this.position = relative;
+            this.position = "relative";
             this.width = "";
             this.height = "";
         }
