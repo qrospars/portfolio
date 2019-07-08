@@ -102,6 +102,11 @@ function addOverlay(projectName) {
     switch(projectName) {
         case 'Abzu':
             break;
+        case 'POCS':
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
+                "projects_sumUp/POCS.html\"></div>";
+            includeHTML();
+            break;
         case 'Cytoo':
             document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
                 "projects_sumUp/Cytoo.html\"></div>";

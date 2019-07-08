@@ -155,7 +155,7 @@ img {
     padding:0;
     margin: 0;
     display: inline-grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: repeat(6, auto);
     align-items: center;
     overflow: hidden;
     transform: translateX(50vw) translateX(-1164px);
