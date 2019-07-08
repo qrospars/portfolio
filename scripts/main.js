@@ -60,17 +60,20 @@ window.onload = function() {
 
     /** WORK GRID **/
     var cpt = -1;
-    var imgs = ["Twitch.jpg\"", "Cytoo.png\"", "Artelia.jpg\"", "Lappart.png\""];
-    var projects = ["'Twitch'", "'Cytoo'","'Artelia'","'Lappart'"];
+    var imgs = ["Twitch.jpg\"", "POCS_1.png\"", "Cytoo.png\"", "Artelia.jpg\"", "Lappart.png\""];
+    var projects = ["'Twitch'", "'POCS'", "'Cytoo'","'Artelia'","'Lappart'"];
     document.getElementById("js-work-grid-item-1").onclick = function() { // Decaler à gauche
         cpt = cpt - 1;
         for (i=1; i<=imgs.length;i++) {
             if (i == 2) { // Si l'element va etre celui du centre
-                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick","addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
-                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
+                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick",
+                    "addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/"
+                    + imgs[mod((cpt+i),imgs.length)] + ">";
             }
             else {
-                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/"
+                    + imgs[mod((cpt+i),imgs.length)] + ">";
             }
             console.log(-2%4);
         }
@@ -79,11 +82,14 @@ window.onload = function() {
         cpt = cpt + 1;
         for (i=1; i<=imgs.length;i++) {
             if (i == 2) { // Si l'element va etre celui du centre
-                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick","addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
-                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
+                document.getElementById("js-work-grid-item-" + i).setAttribute("onclick",
+                    "addOverlay(" + projects[mod((cpt+i),imgs.length)] + ")");
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/"
+                    + imgs[mod((cpt+i),imgs.length)] + ">";
             }
             else {
-                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/" + imgs[mod((cpt+i),imgs.length)] + ">";
+                document.getElementById("js-work-grid-item-" + i).innerHTML = "<img src=\"images/"
+                    + imgs[mod((cpt+i),imgs.length)] + ">";
             }
         }
     };
@@ -97,19 +103,23 @@ function addOverlay(projectName) {
         case 'Abzu':
             break;
         case 'Cytoo':
-            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Cytoo.html\"></div>";
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
+                "projects_sumUp/Cytoo.html\"></div>";
             includeHTML();
             break;
         case 'Artelia':
-            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Artelia.html\"></div>";
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
+                "projects_sumUp/Artelia.html\"></div>";
             includeHTML();
             break;
         case 'Twitch':
-            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Twitch.html\"></div>";
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
+                "projects_sumUp/Twitch.html\"></div>";
             includeHTML();
             break;
         case 'Lappart':
-            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/projects_sumUp/Lappart.html\"></div>";
+            document.getElementById("js-work-hover-text").innerHTML = "<div w3-include-html=\"pages/" +
+                "projects_sumUp/Lappart.html\"></div>";
             includeHTML();
             break;
         default:
