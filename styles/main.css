@@ -49,7 +49,7 @@ a {
     outline: 0;
 }
 img {
-    width: 100%;
+    width:100%;
 }
 
 /* HOME */
@@ -79,7 +79,7 @@ img {
 }
 .presentation {
     padding: 150px 0 0 50px;
-    width: 800px;
+    max-width: 800px;
 }
 .presentation-text {
     font-family: "Brandon Grotesque Medium";
@@ -148,7 +148,6 @@ img {
     transform: translateY(-50%);
 }
 #work-grid-item-2 img {
-
     transition: .2s ease-in-out;
 }
 .work-grid-list {
@@ -158,15 +157,19 @@ img {
     grid-template-columns: repeat(6, auto);
     align-items: center;
     overflow: hidden;
-    transform: translateX(50vw) translateX(-1164px);
+    transform: translateX(-25vw);
 }
 .work-grid-list-item {
-    width:676px;
-    height:368px;
-    margin: 0 50px 0 50px;
-    display: inline-block;
+    width:50vw;
     transition: .2s ease-in-out;
-
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+}
+.work-grid-list-item img {
+    width: 80%;
+    margin: auto;
 }
 .work-grid-list-item-courant:hover {
     transform: scale(1.2,1.2);
@@ -269,7 +272,7 @@ img {
     display: inline-grid;
     grid-template-columns: auto auto auto;
     position: absolute;
-    padding: 200px 200px 200px 200px;
+    padding: 200px 50px;
     margin: 0;
     width: 100%;
     height: 98%;
@@ -283,7 +286,7 @@ img {
 .about-logos {
     position: relative;
     width: 600px;
-    padding-left: 200px;
+    padding-left: 50px;
     color: #f9f8fa;
     font-size: 3em;
     top:50%;
@@ -315,4 +318,40 @@ img {
     z-index:-999;
     cursor: pointer;
     transition: 0.5s;
+}
+
+/* MOBILE CSS */
+
+@media only screen and (max-width: 768px) {
+    .presentation-text{
+        font-size: 40px;
+    }
+    .menu-icon {
+        padding-top: 10px;
+    }
+
+    .work-grid-list-item img {
+        max-width: 300px;
+    }
+    .blog-container-text {
+        font-size: 40px;
+    }
+    .about {
+        overflow: hidden;
+    }
+    .about-container {
+        padding: 100px 0 0 100px;
+        width: 100%;
+    }
+    .about-text {
+        width: 100%;
+        font-size: 20px;
+    }
+    .home {
+        top: 20px;
+        left: 20px;
+    }
+    .home-icon {
+        font-size: 25px;
+    }
 }

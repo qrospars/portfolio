@@ -20,7 +20,7 @@ var bckg = 0xffffff,
     c1 = 0x000000;
 
 function setup() {
-    createCanvas(windowWidth-20, windowHeight);
+    createCanvas(windowWidth, windowHeight);
     smooth(4);
     initiate();
 }
