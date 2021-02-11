@@ -1,0 +1,406 @@
+.App {
+  text-align: center;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+}
+
+.page--light {
+  --main-light-color: #f9f8fa;
+  background: var(--main-light-color);
+}
+
+.page--dark {
+  --main-dark-color: #323232;
+  background: var(--main-dark-color);
+}
+
+/* FONTS */
+
+@font-face {
+  font-family: "Brandon Grotesque Black";
+  src: url("Brandon_Grotesque/Brandon_blk.otf");
+}
+@font-face {
+  font-family: "Brandon Grotesque Bold";
+  src: url("Brandon_Grotesque/Brandon_bld.otf");
+}
+@font-face {
+  font-family: "Brandon Grotesque Medium";
+  src: url("Brandon_Grotesque/Brandon_med.otf");
+}
+@font-face {
+  font-family: "Brandon Grotesque Regular";
+  src: url("Brandon_Grotesque/Brandon_reg.otf");
+}
+@font-face {
+  font-family: "Brandon Grotesque Light";
+  src: url("Brandon_Grotesque/Brandon_light.otf");
+}
+@font-face {
+  font-family: "Brandon Grotesque Thin";
+  src: url("Brandon_Grotesque/Brandon_thin.otf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  background: var(--main-light-color);
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+ul {
+  list-style: none;
+}
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
+}
+img {
+  width:100%;
+}
+
+#canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: var(--main-light-color);
+}
+/* HOME */
+
+.home {
+  position: fixed;
+  z-index: 999;
+  top: 50px;
+  left: 50px;
+}
+.home-icon {
+  color: var(--main-dark-color);
+  font-size: 3rem;
+  transition-duration: 0.5s;
+}
+
+#page-0 {
+  height: 100vh;
+  display: grid;
+  align-content: center;
+  grid-template-rows: 1fr auto;
+}
+/* MENU */
+.menu-wrapper {
+  margin: auto;
+}
+.presentation {
+  text-align: left;
+  padding: 0 10%;
+}
+.presentation-text {
+  font-family: "Brandon Grotesque Medium";
+  font-size: 8rem;
+}
+.menu {
+  text-align: center;
+  display: block;
+  left:0;
+  right: 0;
+  bottom: 10rem;
+}
+.menu-list {
+  padding: 0;
+  font-size: 0;
+}
+.menu-list-item {
+  border-bottom: 0.2rem solid #3c3f41;
+  display: inline-block;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  padding-bottom: 0.5rem;
+  color: var(--main-dark-color);
+  font-size: 1.7rem;
+  font-family: "Brandon Grotesque Light";
+  text-transform: uppercase;
+}
+.menu-list-item a {
+  color: var(--main-dark-color);
+  text-decoration: none;
+}
+.menu-list-item a:hover {
+  color: #5574d5;
+  transition-duration: 500ms;
+}
+.menu-icon {
+  padding: 10rem 0 5rem;
+}
+.menu-icon-arrow {
+  display: inline-block;
+  font-size: 3rem;
+  color: var(--main-dark-color);
+  width: 100px;
+
+}
+
+/* WORK */
+
+#page-1 {
+  background: var(--main-dark-color);
+}
+#work-grid-item-2 img {
+  transition: .2s ease-in-out;
+}
+.work-grid {
+  width: 100%;
+  height: 100%;
+}
+.work-grid-list {
+  padding:0;
+  margin: 0;
+  display: inline-grid;
+  grid-template-columns: repeat(6, auto);
+  align-items: center;
+  overflow: hidden;
+  transform: translateX(-25vw);
+}
+.work-grid-list-item {
+  width:50vw;
+  transition: .2s ease-in-out;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  cursor: pointer;
+}
+.work-grid-list-item img {
+  width: 80%;
+  margin: auto;
+}
+.work-grid-list-item-courant:hover {
+  transform: scale(1.2,1.2);
+}
+.work-grid-list-item:hover {
+  cursor: pointer;
+}
+.work-grid-list-item-courant {
+  transition-duration: 0.5s;
+}
+.work-grid-list-item:hover {
+  opacity: 0.5;
+}
+
+/* Work, on hover, detailed description of the project */
+.work-hover {
+  overflow: auto;
+  position: absolute;
+  background-color: white;
+  width: 70vw;
+  height: 100vh;
+  padding: 50px 50px 50px 70px;
+  z-index: 1000;
+  transform: translateX(100vw);
+  transition: ease 1s;
+}
+.work-hover-text-title {
+  color: var(--main-dark-color);
+  font-family: "Brandon Grotesque Medium";
+  font-size: 8em;
+  text-decoration: underline;
+}
+.work-hover-text-content {
+  margin: 20px 0 50px 0;
+  padding: 0 0 100px 0;
+  color: var(--main-dark-color);
+  font-family: "Brandon Grotesque Regular";
+  font-size: 2em;
+}
+.work-hover-text-content-im {
+  display: block;
+  margin: 50px auto 50px auto;
+  width: 400px;
+}
+.work-hover-text-content-link {
+  color: var(--main-dark-color);
+  opacity: 0.7;
+  margin: auto;
+}
+/* Work on Hover RETURN BUTTON */
+
+.work-hover-return {
+  position: fixed;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  margin: 50px 50px 50px 50px;
+  right: 0;
+}
+.fa-caret-right {
+  position: relative;
+  font-size: 4em;
+  color: var(--main-dark-color);
+  cursor: pointer;
+}
+
+
+/* BLOG */
+
+.blog {
+  background: var(--main-light-color);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-container {
+  position: absolute;
+  width:100%;
+  height:98%;
+}
+.blog-container-text {
+  padding-top: 200px;
+  color: var(--main-dark-color);
+  font-family: "Brandon Grotesque Medium";
+  font-size: 8rem;
+}
+
+/* ABOUT */
+
+.about {
+  position: absolute;
+  background: var(--main-dark-color);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.about-container {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  position: absolute;
+  padding: 200px 50px;
+  margin: 0;
+  width: 100%;
+  height: 98%;
+}
+.about-text {
+  width: 500px;
+  font-size: 3em;
+  font-family: "Brandon Grotesque Light";
+  color: var(--main-light-color);
+}
+.about-logos {
+  position: relative;
+  width: 600px;
+  padding-left: 50px;
+  color: var(--main-light-color);
+  font-size: 3em;
+  top:50%;
+  transform: translateY(-50%);
+}
+.about-logos-container {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 100px;
+  top:50%;
+  transform: translateY(-50%);
+}
+.about-photo {
+  box-sizing: content-box;
+  width: 400px;
+}
+
+/** OVERLAY */
+
+.overlay{
+  opacity:0;
+  background-color:white;
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:-999;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+/* MOBILE CSS */
+
+@media only screen and (max-width: 768px) {
+  .presentation-text{
+    font-size: 40px;
+  }
+  .menu-icon {
+    padding-top: 10px;
+  }
+
+  .work-grid-list-item img {
+    max-width: 300px;
+  }
+  .blog-container-text {
+    font-size: 40px;
+  }
+  .about {
+    overflow: hidden;
+  }
+  .about-container {
+    padding: 100px 0 0 100px;
+    width: 100%;
+  }
+  .about-text {
+    width: 100%;
+    font-size: 20px;
+  }
+  .home {
+    top: 20px;
+    left: 20px;
+  }
+  .home-icon {
+    font-size: 25px;
+  }
+}
