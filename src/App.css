@@ -52,6 +52,7 @@
 .page--dark {
   --main-dark-color: #323232;
   background: var(--main-dark-color);
+  color: var(--main-light-color);
 }
 
 /* FONTS */
@@ -329,8 +330,6 @@ img {
 .about-text {
   width: 500px;
   font-size: 3em;
-  font-family: "Brandon Grotesque Light";
-  color: var(--main-light-color);
 }
 .about-logos {
   position: relative;
