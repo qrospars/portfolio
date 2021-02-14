@@ -3,7 +3,7 @@ import './App.css';
 import React, {useEffect, useRef, useState} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel from 'react-bootstrap/Carousel'
+import ProjectCarousel from "./components/ProjectCarousel";
 
 function App() {
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -74,50 +74,7 @@ function App() {
             </div>
             <div id="page-1" className="page page--dark" ref={pageRefs[1]}>
                 <div className="work-grid">
-                    <Carousel>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/Twitch.jpg"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/POCS_1.png"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/Cytoo.png"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/Artelia.jpg"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/Twitch.jpg"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item className="work-grid-list-item">
-                            <img src="images/Lappart1.png"/>
-                            <Carousel.Caption>
-                                <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
-                                <p className={'text--paragraph'}>Twitch Channel</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                    </Carousel>
+                    <ProjectCarousel/>
                 </div>
                 <div id="js-work-hover" className="work-hover">
                     <div id="js-work-hover-text" className="work-hover-text">
