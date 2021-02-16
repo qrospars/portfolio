@@ -1,5 +1,5 @@
 var iris = [];
-var niris = 500;
+var niris = 100;
 // noise factors
 var noiseScale, noiseStrength;
 
