@@ -98,7 +98,7 @@ function App() {
                 </div>
             </div>
             <div ref={pageRefs[3]} id="page-3" className="page page--dark">
-                <img className="about-photo" src="images/profil.jpg"/>
+                <img className="about-photo" src={process.env.PUBLIC_URL + "/images/profil.jpg"}/>
                 <div className="about-container">
                     <div className="about-text text--medium">
                         <div>

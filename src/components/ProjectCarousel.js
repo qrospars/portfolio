@@ -27,42 +27,42 @@ export default function ProjectCarousel() {
             <Carousel activeIndex={carouselIndex} onSelect={handleSelect} interval={pauseCarousel}
                       onClick={showOverlay}>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/Twitch.jpg"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Twitch.jpg"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/POCS_1.png"/>
+                    <img src={process.env.PUBLIC_URL + "/images/POCS_1.png"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/Cytoo.png"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Cytoo.png"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/Artelia.jpg"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Artelia.jpg"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/Twitch.jpg"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Twitch.jpg"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="work-grid-list-item">
-                    <img src="../images/Lappart1.png"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Lappart1.png"}/>
                     <Carousel.Caption>
                         <h3 className={'text--medium'}>What Do We Mean by Interaction?</h3>
                         <p className={'text--paragraph'}>Twitch Channel</p>

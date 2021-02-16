@@ -1,49 +1,52 @@
-var iris = [];
-var niris = 500;
+const iris = [];
+const niris = 200;
+const fr = 120;
 // noise factors
-var noiseScale, noiseStrength;
+let noiseScale, noiseStrength;
 
 // noise display factors
-var overlayAlpha = 40,
+const overlayAlpha = 40,
     irisAlpha = 255,
     strokeWidth = .3;
 
 // main circle parameters
-var radius,minradius=50,maxradius=300;
+let radius;
+const minradius = 100, maxradius = 300;
 
-// animation related variables
-var nInsideIris = 0,
-    timer = 0;
+// animation related constiables
+let nInsideIris = 0;
+let timer = 0;
 
 // colors
-var bckg = 0xffffff,
+const bckg = 0xffffff,
     c1 = 0x000000;
 
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas');
     smooth(4);
+    frameRate(fr);
     initiate();
 }
 
 function initiate() {
     timer = 0;
     // radius change for every cycle
-    radius = random(minradius,maxradius);
+    radius = random(minradius, maxradius);
     nInsideIris = niris;
     // new noise
-    noiseScale = int(random(300,1500));
+    noiseScale = int(random(300, 1500));
     noiseStrength = int(random(25, 100));
     noiseDetail(int(random(1, 10)), 0.5);
-    for (var i = 0; i < niris; i++) {
+    for (let i = 0; i < niris; i++) {
         iris[i] = new Iris();
     }
 }
 
 function draw() {
 
-    if (nInsideIris == 0) {
-        if (timer == 40) {
+    if (nInsideIris === 0) {
+        if (timer === 40) {
             initiate();
         } else {
             // this is for that quick fade at the end of a cycle
@@ -54,7 +57,7 @@ function draw() {
         }
     } else {
         // Animate Iris
-        for (var i = 0; i < niris; i++) {
+        for (let i = 0; i < niris; i++) {
             if (iris[i].isInside) iris[i].drawIris();
         }
     }
@@ -78,7 +81,8 @@ function Iris() {
     this.oy = this.y = this.sy;
 }
 
-Iris.prototype.drawIris = function() {
+Iris.prototype.drawIris = function () {
+
     // calculate angle which is based on noise
     // and then use it for x and y positions
     this.angle = noise(this.x / noiseScale, this.y / noiseScale) * noiseStrength;
@@ -102,4 +106,4 @@ Iris.prototype.drawIris = function() {
         strokeWeight(strokeWidth);
         line(this.ox, this.oy, this.x, this.y);
     } else nInsideIris--; //decrease number of Iris inside
-}
+};
