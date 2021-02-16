@@ -230,7 +230,7 @@ img {
   height: fit-content;
   overflow: scroll;
   padding: 50px 50px 50px 70px;
-  transform: translateX(0vw);
+  transform: translateX(-100vw);
   transition: ease 1s;
 }
 /*#carouselOverlay::-webkit-scrollbar {*/
