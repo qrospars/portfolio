@@ -20,7 +20,6 @@ let timer = 0;
 // colors
 const bckg = 0xffffff,
     c1 = 0x000000;
-
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas');
@@ -32,7 +31,7 @@ function setup() {
 function initiate() {
     timer = 0;
     // radius change for every cycle
-    radius = random(minradius, maxradius);
+    radius = random(windowWidth*0.20, windowWidth*0.40);
     nInsideIris = niris;
     // new noise
     noiseScale = int(random(300, 1500));
