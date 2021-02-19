@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Artelia() {
+export default function Artelia() {
     return (
         <div className={'work-hover'}>
             <h1 className="work-hover-text-title">
@@ -13,15 +13,15 @@ function Artelia() {
                     a complete tool that would analyse AIS data, turn it into a database and finally analyse it using a
                     web-based application.
 
-                    <p>I used web technologies like d3.js for making charts and mapbox / leaflet for making maps</p>
+                    <br/>I used web technologies like d3.js for making charts and mapbox / leaflet for making maps
                 </p>
-                <img className="work-hover-text-content-im" src={`/images/Artelia_2.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_2.png`}/>
                 <p className="work-hover-text-content-p">
                     I had to make a web scraping of about 1300 ships on three different websites to take
                     information about these ships.
                     For that, I mainly used BeautifulSoup, a Python's library.
                 </p>
-                <img className="work-hover-text-content-im" src={`images/Artelia_6.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_6.png`}/>
                 <p className="work-hover-text-content-p">
                     I am really proud of the final result, even if it is still in development. Unfortunately, I
                     can't tell you more about
@@ -29,10 +29,10 @@ function Artelia() {
                     but you will find some screenshots
                     below :
                 </p>
-                <img className="work-hover-text-content-im" src={`images/Artelia_3.png`}/>
-                <img className="work-hover-text-content-im" src={`images/Artelia_4.png`}/>
-                <img className="work-hover-text-content-im" src={`images/Artelia_5.png`}/>
-                <img className="work-hover-text-content-im" src={`images/Artelia_7.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_3.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_4.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_5.png`}/>
+                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_7.png`}/>
                 <a className="work-hover-text-content-link"
                    href="https://www.arteliagroup.com/en" target="_blank">
                     Artelia Group
@@ -41,5 +41,3 @@ function Artelia() {
         </div>
     )
 }
-
-export default Artelia;

@@ -3,21 +3,17 @@
 }
 .text--paragraph {
   font-size: 2vmax;
-  color: #e0dfe1;
+  color: #f8f7f9;
 }
 
 .App {
+  --main-light-color: #f9f8fa;
+  --main-dark-color: #323232;
   position: relative;
   text-align: center;
   max-width: 100vw;
   overflow-x: hidden;
   font-family: "Brandon Grotesque Medium";
-}
-.scroll-container {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  height: 100vh;
-  overflow-y: scroll;
 }
 .App-logo {
   height: 40vmin;
@@ -54,20 +50,31 @@
   }
 }
 
+.scroll-container {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
 .page {
   position: relative;
   overflow: hidden;
   height: 100vh;
   scroll-snap-align: center;
 }
+.page .data {
+  opacity:0;
+  transition: opacity 1000ms;
+}
+.page.is-visible .data{
+  opacity: 1;
+}
 
 .page--light {
-  --main-light-color: #f9f8fa;
   background: var(--main-light-color);
 }
 
 .page--dark {
-  --main-dark-color: #323232;
   background: var(--main-dark-color);
   color: var(--main-light-color);
 }
@@ -119,7 +126,7 @@ a {
   margin: 0;
   padding: 0;
   text-decoration: none !important;
-  color: var(--main-dark-color) !important;
+  color: var(--main-dark-color);
   outline: 0;
 
 }
@@ -147,13 +154,18 @@ img {
 .home {
   position: fixed;
   z-index: 999;
-  top: 50px;
-  left: 50px;
+  top: 5vh;
+  left: 5vw;
+  cursor: pointer;
 }
 .home-icon {
   color: var(--main-dark-color);
-  font-size: 3rem;
+  mix-blend-mode: difference;
+  font-size: 3vmax;
   transition-duration: 0.5s;
+}
+.home--light .home-icon {
+  color: #F9F8FA;
 }
 
 #page-0 {
@@ -194,16 +206,13 @@ img {
   font-family: "Brandon Grotesque Light";
   text-transform: uppercase;
 }
-.menu-list-item a {
+.menu a {
   color: var(--main-dark-color);
   text-decoration: none;
 }
-.menu-list-item a:hover {
-  color: #5574d5;
-  transition-duration: 500ms;
-}
 .menu-icon {
   padding: 10rem 0 5rem;
+  color: var(--main-dark-color);
 }
 .menu-icon-arrow {
   display: inline-block;
@@ -228,55 +237,66 @@ img {
 /* Work, on hover, detailed description of the project */
 
 #carouselOverlay{
-  background-color:white;
+  background: var(--main-dark-color);
+  color: var(--main-light-color);
   position:fixed;
   top:0;
   left:0;
   z-index: 1000;
   width: 100vw;
-  height: fit-content;
+  height: 100vh;
+  padding: 10vh 10vw;
+  transform: translateX(100vw);
   overflow: scroll;
-  padding: 50px 50px 50px 70px;
-  transform: translateX(-100vw);
   transition: ease 1s;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#carouselOverlay a {
+  transform: translateX(0vw);
+  color: var(--main-light-color);
+}
+#carouselOverlay.visible {
+  transform: translateX(0vw);
+}
+#carouselOverlay::-webkit-scrollbar {
+  display: none;
+}
+.noscroll {
+  overflow: hidden;
 }
 /*#carouselOverlay::-webkit-scrollbar {*/
 /*  display: none;*/
 /*}*/
 
 .backIcon {
-  position: fixed;
-  top: 5vh;
-  left: 5vw;
-  font-size: 4rem;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  font-size: 4vmax;
   z-index: 1000;
 }
 
 .work-hover {
-  width: 100%;
-  height: 100%;
   z-index: 1000;
-  overflow: scroll;
+  overflow: auto;
 }
 .work-hover-text-title {
-  color: var(--main-dark-color);
-  font-size: 8em;
+  font-size: 5vmax;
   text-decoration: underline;
 }
 .work-hover-text-content {
   margin: 20px 0 50px 0;
   padding: 0 0 100px 0;
-  color: var(--main-dark-color);
   font-family: "Brandon Grotesque Regular";
-  font-size: 2em;
+  font-size: 5vmin;
 }
 .work-hover-text-content-im {
   display: block;
   margin: 50px auto 50px auto;
-  width: 400px;
+  width: 50vmax;
 }
 .work-hover-text-content-link {
-  color: var(--main-dark-color);
   opacity: 0.7;
   margin: auto;
 }
@@ -327,7 +347,7 @@ img {
   font-size: 2vmax;
 }
 .about-container a {
-  color: var(--main-light-color) !important;
+  color: var(--main-light-color);
 }
 .about-logos-container {
   display: grid;
