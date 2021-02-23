@@ -249,8 +249,6 @@ img {
   transform: translateX(100vw);
   overflow: scroll;
   transition: ease 1s;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 #carouselOverlay a {
   transform: translateX(0vw);
@@ -258,9 +256,6 @@ img {
 }
 #carouselOverlay.visible {
   transform: translateX(0vw);
-}
-#carouselOverlay::-webkit-scrollbar {
-  display: none;
 }
 .noscroll {
   overflow: hidden;

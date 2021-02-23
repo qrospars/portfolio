@@ -116,7 +116,7 @@ function App() {
                                     style={{color: 'white'}}>Valtech</a> in Copenhagen.
                                 </div>
                                 <div>
-                                    I always have been passionated about Art & Coding, and I try to link these two
+                                    I always have been passionate about Art & Coding, and I try to link these two
                                     worlds in my work. My strongest skills are probably data visualization, UX
                                     optimization and web development.
                                 </div>
