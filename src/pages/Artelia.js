@@ -6,7 +6,7 @@ export default function Artelia() {
             <h1 className="work-hover-text-title">
                 Artelia
             </h1>
-            <div className="work-hover-text-content">
+            <div className="work-hover-text-content font--paragraph text--paragraph">
                 <p className="work-hover-text-content-p">
                     In 2018, I developed a maritime traffic tool for Artelia and Total groups. They asked me to make in
                     3 months

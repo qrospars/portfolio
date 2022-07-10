@@ -1,5 +1,5 @@
 const iris = [];
-const niris = 200;
+let niris = 200;
 const fr = 120;
 // noise factors
 let noiseScale, noiseStrength;
@@ -22,6 +22,9 @@ const bckg = 0xffffff,
     c1 = 0x000000;
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
+    if (windowWidth > 800) {
+        niris = 500
+    }
     canvas.parent('canvas');
     smooth(4);
     frameRate(fr);

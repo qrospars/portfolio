@@ -89,8 +89,8 @@ export default function ProjectCarousel({
                                            key={Object.keys(carouselContent)[index]}>
                                 <img src={process.env.PUBLIC_URL + project.img}/>
                                 <Carousel.Caption>
-                                    <h3 className={'text--medium'}>{project.caption.title}</h3>
-                                    <p className={'text--paragraph'}>{project.caption.subtitle}</p>
+                                    <h3 className={'text--medium font--title'}>{project.caption.title}</h3>
+                                    <p className={'text--subtitle'}>{project.caption.subtitle}</p>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         )

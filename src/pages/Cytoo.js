@@ -6,7 +6,7 @@ export default function Cytoo() {
             <h1 className="work-hover-text-title">
                 SeekStries
             </h1>
-            <div className="work-hover-text-content">
+            <div className="work-hover-text-content font--paragraph text--paragraph">
                 <p className="work-hover-text-content-p">
                     CYTOO company asked me and some of my schoolmates at university to create an image processing tool
                     to analyse many muscular fibers images at once, and find striations within.<br/><br/>

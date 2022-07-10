@@ -60,6 +60,12 @@ img {
     top: 50px;
     left: 50px;
 }
+.contact {
+    position: fixed;
+    z-index: 999;
+    top: 50px;
+    right: 50px;
+}
 .home-icon {
     color: #323232;
     font-size: 3rem;
@@ -80,10 +86,10 @@ img {
 .presentation {
     padding: 150px 0 0 50px;
     max-width: 800px;
+
 }
 .presentation-text {
     font-family: "Brandon Grotesque Medium";
-    font-size: 8rem;
 }
 .menu {
     position: absolute;
@@ -91,7 +97,7 @@ img {
     display: block;
     left:0;
     right: 0;
-    bottom: 5%;
+    bottom: 15vh;
 }
 .menu-list {
     padding: 0;
@@ -104,8 +110,6 @@ img {
     margin-right: 15px;
     padding-bottom: 3px;
     color: #323232;
-    font-size: 1.7rem;
-    font-family: "Brandon Grotesque Light";
     text-transform: uppercase;
 }
 .menu-list-item a {
@@ -198,16 +202,15 @@ img {
 }
 .work-hover-text-title {
     color: #323232;
-    font-family: "Brandon Grotesque Medium";
-    font-size: 8em;
-    text-decoration: underline;
+    font-size: 48px;
+    font-family: "Gulzar", serif;
 }
 .work-hover-text-content {
     margin: 20px 0 50px 0;
     padding: 0 0 100px 0;
     color: #323232;
     font-family: "Brandon Grotesque Regular";
-    font-size: 2em;
+    font-size: 20px;
 }
 .work-hover-text-content-im {
     display: block;
@@ -324,7 +327,8 @@ img {
 
 @media only screen and (max-width: 768px) {
     .presentation-text{
-        font-size: 40px;
+        font-size: 32px;
+        color: red;
     }
     .menu-icon {
         padding-top: 10px;
