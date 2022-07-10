@@ -1,11 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useRef, useState} from 'react';
+import { Parallax } from 'react-scroll-parallax';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProjectCarousel from "./components/ProjectCarousel";
+import Artelia from "./pages/Artelia";
+import POCS from "./pages/POCS";
+import Cytoo from "./pages/Cytoo";
+import Discover from "./pages/Discover";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
+    // const { ref2 } = useParallax({ speed: 10 });
+    // const { ref3 } = useParallax({ speed: 20 });
     useEffect( // make the content visible
         () => {
             const sections = [...document.querySelectorAll(".page")];
@@ -16,8 +25,6 @@ function App() {
             const callback = (entries, observer) => {
                 entries.forEach(entry => {
                     const {target} = entry;
-                    console.log(target)
-
                     if (entry.intersectionRatio >= 0.75) {
                         target.classList.add("is-visible");
                     } else {
@@ -60,117 +67,165 @@ function App() {
     //     };
     // })
 
-    return (<div id={'app'} className="App">
-        <div className="home text--paragraph font--title textColor--white">
-            <a onClick={() => document.getElementById("page-0").scrollIntoView({behavior: 'smooth'})}>
-                <span id={"homeButton"}>Quentin Rospars</span>
-            </a>
-        </div>
-        <div className="home contact text--paragraph font--title textColor--white">
-            <a onClick={() => document.getElementById("page-3").scrollIntoView({behavior: 'smooth'})}>
-                <span>Contact</span>
-            </a>
-        </div>
-        <div id={'canvas'}/>
-        <div className={"scroll-container"}>
-            <div id={"scrollContainer"} className={"scroll-container2"}>
-                <div id="page-0" className="page">
+    /* Overlay Logic */
 
-                    <div className="menu-wrapper" data-content>
-                        <div className="presentation">
-                            <p className="presentation-text font--title data">
-                                Hi, I'm Quentin.
-                            </p>
-                            <p className="text--subtitle data">
-                                You can find some of my work here, just have a look _
-                            </p>
-                        </div>
-                    </div>
-                    <div className="menu">
-                        <ul className="menu-list text--paragraph font--title">
-                            <li className="menu-list-item">
-                                <a className="js-scrollTo" href="#page-1"><span>Work</span></a>
-                            </li>
-                            <li className="menu-list-item">
-                                <a className="js-scrollTo" href="#page-2"><span>My Universe</span></a>
-                            </li>
-                            <li className="menu-list-item">
-                                <a className="js-scrollTo" href="#page-3"><span>About</span></a>
-                            </li>
-                        </ul>
-                        {/*<div className="menu-icon">*/}
-                        {/*    <div className="menu-icon-arrow">*/}
-                        {/*        <a className="js-scrollTo" href="#page-1">*/}
-                        {/*            <i className="fas fa-long-arrow-alt-down"></i>*/}
-                        {/*        </a>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                    </div>
+    const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+    const [currentOverlayContent, setCurrentOverlayContent] = useState(<Artelia/>);
+    const defaultSpeed = 10000;
+    const [pauseCarousel, setPauseCarousel] = useState(defaultSpeed);
+    const myRef = useRef(null)
+    const showOverlay = (overlayContent) => {
+        document.getElementById("carouselOverlay").scroll(0,0)
+        document.querySelector('.scroll-container').classList.toggle('noscroll');
+        setCurrentOverlayContent(overlayContent);
+        setIsOverlayVisible(true);
+    };
+    const hideOverlay = () => {
+        document.querySelector('.scroll-container').classList.toggle('noscroll');
+        setIsOverlayVisible(false);
+        setPauseCarousel(defaultSpeed)
+    };
+    useEffect(() => {
+        window.onpopstate = e => {
+            if (isOverlayVisible) {
+                e.preventDefault();
+                hideOverlay();
+            }
+        }
+    });
+
+    return (
+        <div id={'app'} className="App">
+                <div className="home text--paragraph font--title textColor--white">
+                    <a onClick={() => document.getElementById("page-0").scrollIntoView({behavior: 'smooth'})}>
+                        <span id={"homeButton"}>Quentin Rospars</span>
+                    </a>
                 </div>
-                <div id="page-1" className="page page--dark">
-                    <div className="work-grid data" data-content>
-                        <ProjectCarousel/>
-                    </div>
-                    <div id="js-work-hover" className="work-hover">
-                        <div id="js-work-hover-text" className="work-hover-text">
-                            <div w3-include-html="pages/projects_sumUp/POCS.html"></div>
-                        </div>
-                        <div className="work-hover-return"
-                            // onClick="removeOverlay()"
-                        >
-                            <i className="fas fa-caret-right"></i>
-                        </div>
-                    </div>
+                <div className="home contact text--paragraph font--title textColor--white">
+                    <a onClick={() => document.getElementById("page-3").scrollIntoView({behavior: 'smooth'})}>
+                        <span>Contact</span>
+                    </a>
                 </div>
-                <div id="page-2" className="page page--light">
-                    <div className="blog-container">
-                        <div className="blog-container-text data" data-content>
-                            <span>My Universe</span>
-                        </div>
-                        <div className="blog-container-image">
-                            <img src={process.env.PUBLIC_URL + "/images/My_Universe_1.jpg"}/>
-                            <img src={process.env.PUBLIC_URL + "/images/My_Universe_2.jpg"}/>
-                            <img src={process.env.PUBLIC_URL + "/images/My_Universe_3.jpg"}/>
-                        </div>
-                    </div>
-                </div>
-                <div id="page-3" className="page page--dark">
-                    <img className="about-photo" src={process.env.PUBLIC_URL + "/images/profil.jpg"}/>
-                    <div className="about-container">
-                        <div className="about-text text--medium font--paragraph data" data-content>
-                            <div>
-                                I'm a french computer scientist working as a UX optimisation consultant for <a
-                                href={'https://ecapacity.com/'} target={'_blank'}
-                                style={{color: 'white'}}>eCapacity</a>_<a
-                                href={'https://www.valtech.com'} target={'_blank'}
-                                style={{color: 'white'}}>Valtech</a> in Copenhagen.
+                <div id={'canvas'}/>
+                <div className={"scroll-container"}>
+                    <div id={"scrollContainer"} className={"scroll-container2"}>
+                        <div id="page-0" className="page">
+
+                            <div className="menu-wrapper" data-content>
+                                <div className="presentation">
+                                    <p className="presentation-text font--title data">
+                                        Hi, I'm Quentin.
+                                    </p>
+                                    <p className="text--subtitle data">
+                                        You can find some of my work here, just have a look _
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                I always have been passionate about Art & Coding, and I try to link these two
-                                worlds in my work. My strongest skills are probably data visualization, UX
-                                optimization and web development.
-                            </div>
-                            <div>
-                                If you think I am someone interesting to talk to, don't hesitate to send me an email
-                                <a href="mailto:rospars.quentin@outlook.com"
-                                   target="_top" style={{color: 'white'}}> rospars.quentin@outlook.com</a> or follow
-                                me on my social media! ❤
+                            <div className="menu">
+                                <ul className="menu-list text--paragraph font--title">
+                                    <li className="menu-list-item">
+                                        <a className="js-scrollTo" href="#page-1"><span>Work</span></a>
+                                    </li>
+                                    <li className="menu-list-item">
+                                        <a className="js-scrollTo" href="#page-2"><span>My Universe</span></a>
+                                    </li>
+                                    <li className="menu-list-item">
+                                        <a className="js-scrollTo" href="#page-3"><span>About</span></a>
+                                    </li>
+                                </ul>
+                                {/*<div className="menu-icon">*/}
+                                {/*    <div className="menu-icon-arrow">*/}
+                                {/*        <a className="js-scrollTo" href="#page-1">*/}
+                                {/*            <i className="fas fa-long-arrow-alt-down"></i>*/}
+                                {/*        </a>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
-                        <div className="about-logos-container">
-                            <a href="https://www.linkedin.com/in/quentin-rospars-a073b6150/" target="_blank"><i
-                                className="fab fa-linkedin-in"></i></a>
-                            <a href="https://www.facebook.com/RosparsQuentin/" target="_blank"><i
-                                className="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/Miionu" target="_blank"><i className="fab fa-twitter"></i></a>
-                            <a href="https://github.com/qrospars" target="_blank"><i
-                                className="fab fa-github-alt"></i></a>
+                        <div id="page-1" className="page page--dark">
+                            <div className="work-grid data" data-content>
+                                <ProjectCarousel
+                                    isOverlayVisible={isOverlayVisible}
+                                    hideOverlay={hideOverlay}
+                                    currentOverlayContent={currentOverlayContent}
+                                    showOverlay={showOverlay}
+                                    pauseCarousel={pauseCarousel}
+                                />
+                            </div>
+                            <div id="js-work-hover" className="work-hover">
+                                <div id="js-work-hover-text" className="work-hover-text">
+                                    <div w3-include-html="pages/projects_sumUp/POCS.html"></div>
+                                </div>
+                                <div className="work-hover-return"
+                                    // onClick="removeOverlay()"
+                                >
+                                    <i className="fas fa-caret-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="page-2" className="page page--light">
+                            <div className="blog-container">
+                                <div className="blog-container-text data" data-content>
+                                    <span>My Universe</span>
+                                </div>
+                                <div className="blog-container-image">
+                                    <img className={"img1"} src={process.env.PUBLIC_URL + "/images/my_universe/My_Universe_1.jpg"} alt={"My_Universe_1"}/>
+                                    <img className={"img2"} src={process.env.PUBLIC_URL + "/images/my_universe/My_Universe_2.jpg"} alt={"My_Universe_2"}/>
+                                    <img  className={"img3"} src={process.env.PUBLIC_URL + "/images/my_universe/My_Universe_3.jpg"} alt={"My_Universe_3"}/>
+                                    <div className={"button--square text--subtitle"}
+                                         onClick={() => showOverlay(<Discover myRef={myRef}/>)}>Discover
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="page-3" className="page page--dark">
+                            <img className="about-photo" src={process.env.PUBLIC_URL + "/images/profil.jpg"}/>
+                            <div className="about-container">
+                                <div className="about-text text--medium font--paragraph data" data-content>
+                                    <div>
+                                        I'm a french computer scientist working as a UX optimisation consultant for <a
+                                        href={'https://ecapacity.com/'} target={'_blank'}
+                                        style={{color: 'white'}}>eCapacity</a>_<a
+                                        href={'https://www.valtech.com'} target={'_blank'}
+                                        style={{color: 'white'}}>Valtech</a> in Copenhagen.
+                                    </div>
+                                    <div>
+                                        I always have been passionate about Art & Coding, and I try to link these two
+                                        worlds in my work. My strongest skills are probably data visualization, UX
+                                        optimization and web development.
+                                    </div>
+                                    <div>
+                                        If you think I am someone interesting to talk to, don't hesitate to send me an
+                                        email
+                                        <a href="mailto:rospars.quentin@outlook.com"
+                                           target="_top" style={{color: 'white'}}> rospars.quentin@outlook.com</a> or
+                                        follow
+                                        me on my social media! ❤
+                                    </div>
+                                </div>
+                                <div className="about-logos-container">
+                                    <a href="https://www.linkedin.com/in/quentin-rospars-a073b6150/" target="_blank"><i
+                                        className="fab fa-linkedin-in"></i></a>
+                                    <a href="https://www.facebook.com/RosparsQuentin/" target="_blank"><i
+                                        className="fab fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/Miionu"
+                                       target="_blank"><i className="fab fa-twitter"></i></a>
+                                    <a href="https://github.com/qrospars" target="_blank"><i
+                                        className="fab fa-github-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id={`carouselOverlay`} className={`${isOverlayVisible ? 'visible' : ''}`}>
+                            <div className={'backIcon'} onClick={hideOverlay}>
+                                <div style={{position: 'sticky'}}>
+                                    <FontAwesomeIcon icon={faArrowLeft}/></div>
+                            </div>
+                            {currentOverlayContent}
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
-    </div>);
+    );
 }
 
 export default App;

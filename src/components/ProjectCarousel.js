@@ -35,57 +35,33 @@ const carouselContent = {
 };
 
 export default function ProjectCarousel({
+                                            showOverlay,pauseCarousel
                                         }) {
-    const defaultSpeed = 10000;
+
+
     const [carouselIndex, setCarouselIndex] = useState(0);
-    const [pauseCarousel, setPauseCarousel] = useState(defaultSpeed);
-    const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-    const [currentOverlayContent, setCurrentOverlayContent] = useState(<Artelia/>);
     const handleSelect = (selectedIndex) => {
         setCarouselIndex(selectedIndex);
     };
-    const showOverlay = () => {
-        document.querySelector('.scroll-container').classList.toggle('noscroll');
+    const setContentAndShowOverlay = () => {
         try {
-            setCurrentOverlayContent(Object
-                .values(carouselContent)
-                .find((project, index) => index === carouselIndex)
-                .overlayContent
+            showOverlay(
+                Object
+                    .values(carouselContent)
+                    .find((project, index) => index === carouselIndex)
+                    .overlayContent
             );
         } catch (e) {
-            setCurrentOverlayContent(<Artelia/>)
+            showOverlay(<Artelia/>)
         }
-        setIsOverlayVisible(true);
-        setPauseCarousel(null);
     };
-    const hideOverlay = () => {
-        document.querySelector('.scroll-container').classList.toggle('noscroll');
-        setIsOverlayVisible(false);
-        setPauseCarousel(defaultSpeed)
-    };
-    useEffect(() => {
-        window.onpopstate = e => {
-            if(isOverlayVisible) {
-                console.log('test')
-                e.preventDefault();
-                hideOverlay();
-            }
-        }
-    });
     return (
         <>
-            <div id={`carouselOverlay`} className={`${isOverlayVisible ? 'visible' : ''}`}>
-                <div className={'backIcon'} onClick={hideOverlay}>
-                    <div style={{position:'sticky'}}>
-                    <FontAwesomeIcon icon={faArrowLeft}/></div>
-                </div>
-                {currentOverlayContent}
-            </div>
             <Carousel activeIndex={carouselIndex} onSelect={handleSelect} interval={pauseCarousel}>
                 {
                     Object.values(carouselContent).map((project, index) => {
                         return (
-                            <Carousel.Item className="work-grid-list-item" onClick={showOverlay}
+                            <Carousel.Item className="work-grid-list-item" onClick={setContentAndShowOverlay}
                                            key={Object.keys(carouselContent)[index]}>
                                 <img src={process.env.PUBLIC_URL + project.img}/>
                                 <Carousel.Caption>

@@ -1,4 +1,6 @@
 import React from 'react';
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 export default function Cytoo() {
     return (
@@ -12,7 +14,7 @@ export default function Cytoo() {
                     to analyse many muscular fibers images at once, and find striations within.<br/><br/>
                     You can see an example of an image that they gave us below :
                 </p>
-                <img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Cytoo_Stries.jpg`}/>
+                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Cytoo_Stries.jpg`}/></Zoom>
                 <p className="work-hover-text-content-p">
                     We had one full-time month to develop it, and each one of us had specific tasks to accomplish. <br/>
                     We used Python to develop it, even for the graphic interface.<br/>

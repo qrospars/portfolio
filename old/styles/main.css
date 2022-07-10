@@ -190,7 +190,6 @@ img {
 
 /* Work, on hover, detailed description of the project */
 .work-hover {
-    overflow: auto;
     position: absolute;
     background-color: white;
     width: 70vw;

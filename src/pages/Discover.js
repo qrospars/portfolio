@@ -2,11 +2,11 @@ import React from 'react';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
-export default function Artelia() {
+export default function Discover() {
     return (
-        <div className={'work-hover'}>
+        <div className={'work-hover discover__container'}>
             <h1 className="work-hover-text-title">
-                Artelia
+                Discover
             </h1>
             <div className="work-hover-text-content font--paragraph text--paragraph">
                 <p className="work-hover-text-content-p">
