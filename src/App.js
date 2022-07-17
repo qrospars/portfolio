@@ -117,7 +117,7 @@ function App() {
                                         Hi, I'm Quentin.
                                     </p>
                                     <p className="text--subtitle data">
-                                        You can find some of my work here, just have a look _
+                                        You can find some of my work here; have a look _
                                     </p>
                                 </div>
                             </div>

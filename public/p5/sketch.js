@@ -23,7 +23,8 @@ const bckg = 0xffffff,
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     if (windowWidth > 800) {
-        niris = 500
+        console.log(windowWidth)
+        niris = 400
     }
     canvas.parent('canvas');
     smooth(4);
@@ -34,7 +35,7 @@ function setup() {
 function initiate() {
     timer = 0;
     // radius change for every cycle
-    radius = random(windowWidth*0.20, windowWidth*0.40);
+    radius = random(windowWidth*0.20, windowWidth*0.30);
     nInsideIris = niris;
     // new noise
     noiseScale = int(random(300, 1500));

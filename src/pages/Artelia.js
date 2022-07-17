@@ -17,13 +17,15 @@ export default function Artelia() {
 
                     <br/>I used web technologies like d3.js for making charts and mapbox / leaflet for making maps
                 </p>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_2.png`}/></Zoom>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_2.png`}/></Zoom>
                 <p className="work-hover-text-content-p">
                     I had to make a web scraping of about 1300 ships on three different websites to take
                     information about these ships.
                     For that, I mainly used BeautifulSoup, a Python's library.
                 </p>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_6.png`}/></Zoom>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_6.png`}/></Zoom>
                 <p className="work-hover-text-content-p">
                     I am really proud of the final result, even if it is still in development. Unfortunately, I
                     can't tell you more about
@@ -31,14 +33,20 @@ export default function Artelia() {
                     but you will find some screenshots
                     below :
                 </p>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_3.png`}/></Zoom>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_4.png`}/></Zoom>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_5.png`}/></Zoom>
-                <Zoom><img className="work-hover-text-content-im" src={`${process.env.PUBLIC_URL}/images/Artelia_7.png`}/></Zoom>
-                <a className="work-hover-text-content-link"
-                   href="https://www.arteliagroup.com/en" target="_blank">
-                    Artelia Group
-                </a>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_3.png`}/></Zoom>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_4.png`}/></Zoom>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_5.png`}/></Zoom>
+                <Zoom><img className="work-hover-text-content-im"
+                           src={`${process.env.PUBLIC_URL}/images/Artelia_7.png`}/></Zoom>
+                <div>
+                    <a className="work-hover-text-content-link"
+                       href="https://www.arteliagroup.com/en" target="_blank">
+                        Artelia Group
+                    </a>
+                </div>
             </div>
         </div>
     )
