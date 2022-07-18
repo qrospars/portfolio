@@ -15,21 +15,21 @@ export default function Artelia() {
                     a complete tool that would analyse AIS data, turn it into a database and finally analyse it using a
                     web-based application.
 
-                    <br/>I used web technologies like d3.js for making charts and mapbox / leaflet for making maps
+                    <br/>I used web technologies like d3.js for making charts and mapbox / leaflet to create the maps
                 </p>
                 <Zoom><img className="work-hover-text-content-im"
                            src={`${process.env.PUBLIC_URL}/images/Artelia_2.png`}/></Zoom>
                 <p className="work-hover-text-content-p">
-                    I had to make a web scraping of about 1300 ships on three different websites to take
-                    information about these ships.
-                    For that, I mainly used BeautifulSoup, a Python's library.
+                    The database was created using web scraping techniques, where I gathered information on about 1300 ships on three different websites.
+                    I mostly used BeautifulSoup, a Python's library, to do the web scraping.
                 </p>
                 <Zoom><img className="work-hover-text-content-im"
                            src={`${process.env.PUBLIC_URL}/images/Artelia_6.png`}/></Zoom>
                 <p className="work-hover-text-content-p">
-                    I am really proud of the final result, even if it is still in development. Unfortunately, I
-                    can't tell you more about
-                    the way I made it or the final purpose of the project because it is completely confidential,
+                    I am really proud of the final result. The data visualizations created during this project still inspires me today, and I would love to design
+                    something more creative out of those.
+                    Due to confidentiality, I
+                    cannot elaborate further on the behind the scenes or the final purpose,
                     but you will find some screenshots
                     below :
                 </p>

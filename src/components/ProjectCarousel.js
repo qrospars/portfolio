@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Carousel from "react-bootstrap/Carousel";
-import Artelia from "../pages/Artelia";
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import Artelia from "../pages/Artelia";
 import POCS from "../pages/POCS";
 import Cytoo from "../pages/Cytoo";
 
@@ -34,11 +32,7 @@ const carouselContent = {
     },
 };
 
-export default function ProjectCarousel({
-                                            showOverlay,pauseCarousel
-                                        }) {
-
-
+export default function ProjectCarousel({showOverlay, pauseCarousel}) {
     const [carouselIndex, setCarouselIndex] = useState(0);
     const handleSelect = (selectedIndex) => {
         setCarouselIndex(selectedIndex);
