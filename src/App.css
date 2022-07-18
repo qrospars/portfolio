@@ -576,7 +576,7 @@ img {
 }
 .projectThumbnail:nth-child(13) {
   grid-column: 9/-1;
-  grid-row: 85;
+  grid-row: 88;
 }
 .projectThumbnail:nth-child(13) img {
   transform-origin: bottom right;
