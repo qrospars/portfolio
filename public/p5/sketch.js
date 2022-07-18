@@ -35,7 +35,13 @@ function setup() {
 function initiate() {
     timer = 0;
     // radius change for every cycle
-    radius = random(windowWidth*0.20, windowWidth*0.30);
+    radius = random(windowWidth*0.25, windowWidth*0.35);
+    if (radius < 100) {
+        radius = 100 + random(0, 50);
+    } else if (radius > 400) {
+        radius = 350 + random(0, 100);
+    }
+    console.log(radius)
     nInsideIris = niris;
     // new noise
     noiseScale = int(random(300, 1500));

@@ -16,7 +16,7 @@
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-medium-image-zoom": "^4.4.3",
-    "react-scripts": "4.0.2",
+    "react-scripts": "^5.0.1",
     "react-scroll-parallax": "^3.2.0",
     "web-vitals": "^1.1.0"
   },
