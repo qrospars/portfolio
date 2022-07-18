@@ -1,5 +1,5 @@
 const iris = [];
-const niris = 200;
+let niris = 200;
 const fr = 120;
 // noise factors
 let noiseScale, noiseStrength;
@@ -22,6 +22,10 @@ const bckg = 0xffffff,
     c1 = 0x000000;
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
+    if (windowWidth > 800) {
+        console.log(windowWidth)
+        niris = 400
+    }
     canvas.parent('canvas');
     smooth(4);
     frameRate(fr);
@@ -31,7 +35,7 @@ function setup() {
 function initiate() {
     timer = 0;
     // radius change for every cycle
-    radius = random(windowWidth*0.20, windowWidth*0.40);
+    radius = random(windowWidth*0.20, windowWidth*0.30);
     nInsideIris = niris;
     // new noise
     noiseScale = int(random(300, 1500));
