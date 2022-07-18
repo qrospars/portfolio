@@ -39,7 +39,7 @@ function initiate() {
     if (radius < 100) {
         radius = 100 + random(0, 50);
     } else if (radius > 400) {
-        radius = 350 + random(0, 100);
+        radius = 350 + random(0, 50);
     }
     console.log(radius)
     nInsideIris = niris;
