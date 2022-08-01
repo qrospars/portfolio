@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ProjectThumbnail from "../components/ProjectThumbnail";
 
 const projects = [
@@ -75,7 +75,7 @@ const projects = [
             'One of the main goals was to analyze the evolution of the interaction types in the HCI research papers.'
     },
     {
-        image: '/images/my_universe/Motion Matching FeatureVectorsSuperposition.png',
+        image: '/images/my_universe/Motion matching loop walk.mp4',//'/images/my_universe/Motion Matching FeatureVectorsSuperposition.png',
         name: 'Motion Matching System',
         client: 'Copenhagen Film School',
         tags: [
