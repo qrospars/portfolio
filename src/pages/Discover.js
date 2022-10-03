@@ -103,7 +103,7 @@ const projects = [
     {
         image: '/images/my_universe/image 10.png',
         name: 'Dashboard Design',
-        client: 'Rolex, Pandora, etc.',
+        client: 'Multiple',
         tags: [
             'Dashboard, Data Visualization'
         ],
