@@ -541,6 +541,10 @@ img {
 }
 
 @media (max-width: 1200px) {
+  .discover {
+    padding: 20px;
+  }
+
   .projectThumbnail {
     text-align: left;
     font-size: 32px;
