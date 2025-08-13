@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import 'react-medium-image-zoom/dist/styles.css'
 
 export default function ProjectThumbnail({ image, name, client, tags, year, description }) {
 
     return (
-        <div className={'projectThumbnail'} data-content>
+        <div className={`projectThumbnail`} data-content>
             {image.includes('mp4') ?
                 <Zoom><video
                     width={window.width < 769 ? "180" : "300"}
