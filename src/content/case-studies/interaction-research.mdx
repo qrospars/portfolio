@@ -1,0 +1,31 @@
+---
+title: What do we mean by interaction?
+summary: A visual exploration of a century of Human-Computer Interaction.
+year: "2019"
+disciplines: [dataVisualization, userResearch, productUx]
+cover: ../../assets/work/pocs/cover.png
+coverAlt: Interface for exploring Human-Computer Interaction research papers
+order: 30
+featured: false
+---
+
+import ProjectImage from '../../components/work/ProjectImage.astro';
+import coverImage from '../../assets/work/pocs/cover.png';
+import paperImage from '../../assets/work/pocs/paper-view.png';
+import detailsImage from '../../assets/work/pocs/details.png';
+import explorationImage from '../../assets/work/pocs/exploration.png';
+
+In 2019, I developed a web application allowing the user to explore a dataset of the last 35 years of research papers in the field of Human-Computer Interaction. It took me 6 months to make it.
+
+I used technologies such as React and D3 to make it. Making it taught me a lot about User Experience design within a web app development.
+
+<ProjectImage src={coverImage} alt="Overview of the Human-Computer Interaction research explorer" />
+
+It was text-related data, so I had to find meaningful ways of representing that type of data. But also give powerful exploration tools to the user. For example, the user can analyze the dataset in its whole or at a paper-level. I used Python for data cleaning and Javascript (JSON objects) for making the objects that D3 will use to make the graphs.
+
+<ProjectImage src={paperImage} alt="Paper-level view in the research explorer" />
+
+I also implemented an OAuth connexion system to give the website's access only to a few people since the dataset is confidential.
+
+<ProjectImage src={detailsImage} alt="Detailed research paper visualization" />
+<ProjectImage src={explorationImage} alt="Exploration tools for the Human-Computer Interaction dataset" />

@@ -1,0 +1,150 @@
+---
+import { isRouteActive, withBase } from '@/lib/urls';
+
+const pathname = Astro.url.pathname;
+const navigation = [
+  { label: 'Work', href: '/work/' },
+  { label: 'About', href: '/about/' },
+];
+---
+
+<header class="site-header" data-header>
+  <a class="site-header__brand" href={withBase('/')} aria-label="Quentin Rospars, home">Quentin Rospars</a>
+  <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-nav-toggle>
+    <span>Menu</span>
+  </button>
+  <nav id="site-navigation" class="site-header__nav" aria-label="Primary" data-nav>
+    {navigation.map((item) => (
+      <a href={withBase(item.href)} aria-current={isRouteActive(pathname, item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
+    <a href="mailto:rospars.quentin@outlook.com">Contact</a>
+  </nav>
+</header>
+
+<script>
+  function initializeNavigation() {
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    if (!header || header.dataset.ready) return;
+    const toggle = header.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+    const nav = header.querySelector<HTMLElement>('[data-nav]');
+    if (!toggle || !nav) return;
+
+    header.dataset.ready = 'true';
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.toggleAttribute('data-open', !expanded);
+    });
+    nav.addEventListener('click', (event) => {
+      if (!(event.target instanceof HTMLAnchorElement)) return;
+      toggle.setAttribute('aria-expanded', 'false');
+      nav.removeAttribute('data-open');
+    });
+  }
+  document.addEventListener('astro:page-load', initializeNavigation);
+  initializeNavigation();
+</script>
+
+<style>
+  .site-header {
+    position: absolute;
+    z-index: var(--z-header);
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: clamp(1.25rem, 2.5vw, 2.5rem) var(--gutter);
+    pointer-events: none;
+  }
+
+  .site-header a,
+  .site-header button {
+    pointer-events: auto;
+  }
+
+  .site-header__brand {
+    font-family: var(--font-display-stack);
+    font-size: var(--step-1);
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .site-header__nav {
+    display: flex;
+    gap: clamp(1rem, 2.5vw, 2.75rem);
+    align-items: center;
+  }
+
+  .site-header__nav a,
+  .site-header__toggle {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .site-header__nav a {
+    position: relative;
+  }
+
+  .site-header__nav a::after {
+    position: absolute;
+    right: 100%;
+    bottom: -0.35rem;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    transition: right var(--duration-base) var(--ease-out);
+  }
+
+  .site-header__nav a:hover::after,
+  .site-header__nav a[aria-current='page']::after {
+    right: 0;
+  }
+
+  .site-header__toggle {
+    display: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 42rem) {
+    .site-header {
+      align-items: flex-start;
+    }
+
+    .site-header__toggle {
+      display: block;
+    }
+
+    .site-header__nav {
+      position: absolute;
+      top: 4.25rem;
+      right: var(--gutter);
+      display: none;
+      min-width: 11rem;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-medium);
+      background: color-mix(in srgb, var(--color-paper) 94%, transparent);
+      box-shadow: 0 1rem 3rem rgb(24 24 23 / 10%);
+      backdrop-filter: blur(12px);
+    }
+
+    .site-header__nav[data-open] {
+      display: flex;
+    }
+  }
+</style>

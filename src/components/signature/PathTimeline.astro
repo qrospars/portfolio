@@ -1,0 +1,583 @@
+---
+import { Image } from 'astro:assets';
+import { DISCIPLINES, DISCIPLINE_IDS, getDisciplineLabel } from '@/config/disciplines';
+import { buildTimelineLayout } from '@/lib/timeline';
+import type { TimelineEvent } from '@/lib/path-events';
+
+interface Props {
+  events: TimelineEvent[];
+}
+
+const { events } = Astro.props;
+const layout = buildTimelineLayout(events, { viewportWidth: 1440, height: 820, railWidth: 224 });
+const pointById = new Map(layout.points.map((point) => [point.id, point]));
+const years = [...new Set(layout.yearMarkers.map(({ year }) => year))];
+---
+
+<section class="path" aria-labelledby="path-title" data-path-timeline>
+  <div class="container container--wide path__intro">
+    <p class="eyebrow eyebrow--accent">The Path</p>
+    <h2 id="path-title">A path, not a ladder.</h2>
+  </div>
+
+  <div class="path__stage" data-path-stage>
+    <aside class="path__rail" data-path-rail aria-label="Discipline lanes">
+      {DISCIPLINE_IDS.map((disciplineId) => (
+        <span data-path-lane-label={disciplineId}>{DISCIPLINES[disciplineId].label}</span>
+      ))}
+    </aside>
+
+    <div class="path__canvas" data-path-canvas>
+      <svg
+        class="path__svg"
+        data-path-svg
+        viewBox={`0 0 ${layout.width} ${layout.height}`}
+        height={layout.height}
+        role="group"
+        aria-labelledby="path-plot-title"
+      >
+        <title id="path-plot-title">Chronological work moving between discipline lanes</title>
+        <g class="path__lanes" aria-hidden="true">
+          {DISCIPLINE_IDS.map((disciplineId) => (
+            <line
+              data-lane-line={disciplineId}
+              x1="0"
+              x2={layout.width}
+              y1={layout.laneYs[disciplineId]}
+              y2={layout.laneYs[disciplineId]}
+            />
+          ))}
+        </g>
+        <g class="path__years" aria-hidden="true">
+          {years.map((year) => {
+            const marker = layout.yearMarkers.find((item) => item.year === year);
+            return (
+              <g data-year-marker={year} transform={`translate(${marker?.x ?? 0} 0)`}>
+                <text x="0" y="36">{year}</text>
+                <line x1="0" x2="0" y1="48" y2={layout.height - 48} />
+              </g>
+            );
+          })}
+        </g>
+        <path class="path__line-underlay" d={layout.path} aria-hidden="true" />
+        <path class="path__line" data-path-line d={layout.path} aria-hidden="true" />
+        <g class="path__events">
+          {events.map((event) => {
+            const point = pointById.get(event.id);
+            if (!point) return null;
+            return (
+              <g class="path__event" data-event-group={event.id}>
+                {point.echoes.map((echo) => (
+                  <>
+                    <line
+                      class="path__echo-stem"
+                      data-echo-stem={echo.discipline}
+                      x1={point.x}
+                      x2={point.x}
+                      y1={point.y}
+                      y2={echo.y}
+                      aria-hidden="true"
+                    />
+                    <circle
+                      class="path__echo-dot"
+                      data-echo-dot={echo.discipline}
+                      cx={point.x}
+                      cy={echo.y}
+                      r="5"
+                      aria-hidden="true"
+                    />
+                  </>
+                ))}
+                <a
+                  class="path__dot-link"
+                  data-event-dot
+                  data-event-id={event.id}
+                  data-date={event.date}
+                  data-order={event.order}
+                  data-discipline={event.discipline}
+                  data-secondary={event.secondaryDisciplines.join(',')}
+                  href={event.href}
+                  aria-label={`${event.displayDate}, ${event.title}. ${getDisciplineLabel(event.discipline)}.`}
+                >
+                  <circle class="path__dot-hit" data-primary-coordinate cx={point.x} cy={point.y} r="22" />
+                  <circle class="path__dot-halo" data-primary-coordinate cx={point.x} cy={point.y} r="15" aria-hidden="true" />
+                  <circle class="path__dot" data-primary-coordinate cx={point.x} cy={point.y} r="7" aria-hidden="true" />
+                </a>
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+    </div>
+
+    <div class="path__cursor" data-path-cursor aria-hidden="true"></div>
+
+    <div class="path__cards">
+      {events.map((event, index) => (
+        <article class="path-card" data-event-card={event.id} hidden={index !== 0}>
+          {event.image && event.imageAlt && (
+            <Image
+              src={event.image}
+              alt={event.imageAlt}
+              widths={[320, 480, 640]}
+              sizes="(max-width: 64rem) calc(100vw - 5rem), 22rem"
+              loading="lazy"
+              quality={82}
+            />
+          )}
+          <div class="path-card__body">
+            <p class="path-card__meta">{event.kind} · {event.displayDate}</p>
+            <h3>{event.title}</h3>
+            <p class="path-card__disciplines">{event.disciplineLabels.join(' · ')}</p>
+            {event.href && <a href={event.href}>View work <span aria-hidden="true">→</span></a>}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="path__hint" data-path-hint>Scroll to follow the path <span aria-hidden="true">→</span></p>
+    <div class="path__progress" aria-hidden="true">
+      <span data-path-progress-value></span>
+    </div>
+  </div>
+
+  <ol class="path__vertical" aria-label="The Path timeline">
+    {events.map((event, index) => (
+      <li data-vertical-event={event.id} class:list={{ 'is-active': index === 0 }}>
+        <button
+          type="button"
+          data-vertical-trigger={event.id}
+          aria-expanded="true"
+          aria-controls={`path-panel-${event.id}`}
+        >
+          <span class="path__vertical-dot" aria-hidden="true"></span>
+          <span class="path__vertical-heading">
+            <span>{event.displayDate} · {event.kind}</span>
+            <strong>{event.title}</strong>
+            <small>{getDisciplineLabel(event.discipline)}</small>
+          </span>
+          <span class="path__vertical-toggle" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <div id={`path-panel-${event.id}`} data-vertical-panel={event.id}>
+          {event.image && event.imageAlt && (
+            <Image
+              src={event.image}
+              alt={event.imageAlt}
+              widths={[360, 600, 900]}
+              sizes="(max-width: 64rem) calc(100vw - 5rem), 40rem"
+              loading="lazy"
+              quality={82}
+            />
+          )}
+          <p>{event.disciplineLabels.join(' · ')}</p>
+          {event.href && <a href={event.href}>View work <span aria-hidden="true">→</span></a>}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<script>
+  import { destroyPathTimelines, initializePathTimelines } from '@/lib/path-timeline.client';
+  document.addEventListener('astro:page-load', initializePathTimelines);
+  document.addEventListener('astro:before-swap', destroyPathTimelines);
+  initializePathTimelines();
+</script>
+
+<style>
+  .path {
+    overflow: clip;
+    background: var(--color-paper);
+  }
+
+  .path__intro {
+    padding-block: var(--space-9) var(--space-7);
+  }
+
+  .path__intro h2 {
+    max-width: 12ch;
+    margin: var(--space-3) 0 0;
+    font-size: var(--step-4);
+  }
+
+  .path__stage {
+    position: relative;
+    display: none;
+    height: 100svh;
+    min-height: 43rem;
+    overflow: hidden;
+    border-block: 1px solid var(--border-default);
+    background: var(--color-paper);
+  }
+
+  .is-desktop .path__stage {
+    display: block;
+  }
+
+  .path__canvas {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 430rem;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .path__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .path__lanes line {
+    stroke: var(--border-default);
+    stroke-width: 1;
+  }
+
+  .path__years text {
+    fill: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+  }
+
+  .path__years line {
+    stroke: color-mix(in srgb, var(--border-default) 55%, transparent);
+    stroke-dasharray: 2 8;
+    stroke-width: 1;
+  }
+
+  .path__line-underlay,
+  .path__line {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .path__line-underlay {
+    stroke: var(--color-paper);
+    stroke-width: 9;
+  }
+
+  .path__line {
+    stroke: var(--color-coral);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3.5;
+  }
+
+  .path__echo-stem {
+    opacity: 0.24;
+    stroke: var(--color-coral);
+    stroke-dasharray: 3 7;
+    stroke-width: 1;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .path__echo-dot {
+    fill: var(--color-paper);
+    opacity: 0.55;
+    stroke: var(--color-coral);
+    stroke-width: 1.5;
+    transition: opacity var(--duration-fast) ease, r var(--duration-fast) ease;
+  }
+
+  .path__dot-hit {
+    fill: transparent;
+  }
+
+  .path__dot-halo {
+    fill: var(--color-coral-soft);
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+  }
+
+  .path__dot {
+    fill: var(--color-paper);
+    stroke: var(--color-coral);
+    stroke-width: 3;
+    transition: fill var(--duration-fast) ease, r var(--duration-fast) ease;
+  }
+
+  .path__dot-link:focus {
+    outline: none;
+  }
+
+  .path__dot-link:focus .path__dot-halo,
+  .path__event.is-active .path__dot-halo {
+    opacity: 0.28;
+    transform: scale(1.15);
+  }
+
+  .path__dot-link:focus .path__dot,
+  .path__event.is-active .path__dot {
+    fill: var(--color-coral);
+    r: 9px;
+  }
+
+  .path__event.is-active .path__echo-stem,
+  .path__event.is-active .path__echo-dot {
+    opacity: 1;
+  }
+
+  .path__event.is-active .path__echo-dot {
+    r: 7px;
+  }
+
+  .path__rail {
+    position: absolute;
+    z-index: 4;
+    inset: 0 auto 0 0;
+    display: grid;
+    width: clamp(11rem, 16vw, 15rem);
+    padding: 72px var(--space-5);
+    grid-template-rows: repeat(10, 1fr);
+    background: linear-gradient(90deg, var(--color-paper) 80%, color-mix(in srgb, var(--color-paper) 0%, transparent));
+    pointer-events: none;
+  }
+
+  .path__rail span {
+    align-self: center;
+    color: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+    transition: color var(--duration-fast) ease, transform var(--duration-fast) ease;
+  }
+
+  .path__rail span.is-active {
+    color: var(--color-coral);
+    transform: translateX(var(--space-2));
+  }
+
+  .path__cursor {
+    position: absolute;
+    z-index: 3;
+    inset-block: 48px;
+    left: 0;
+    width: 1px;
+    opacity: 0;
+    background: color-mix(in srgb, var(--color-coral) 72%, transparent);
+    pointer-events: none;
+    transition: opacity var(--duration-fast) ease;
+    will-change: transform;
+  }
+
+  .has-pointer .path__cursor,
+  .has-keyboard-cursor .path__cursor {
+    opacity: 1;
+  }
+
+  .path__cards {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .path-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(17rem, 24vw, 22rem);
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-small);
+    background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+    box-shadow: 0 1.25rem 4rem color-mix(in srgb, var(--color-ink) 10%, transparent);
+    pointer-events: auto;
+    will-change: transform;
+  }
+
+  .path-card[hidden] {
+    display: none;
+  }
+
+  .path-card :global(img) {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .path-card__body {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .path-card__meta,
+  .path-card__disciplines {
+    margin: 0;
+    color: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+  }
+
+  .path-card h3 {
+    margin: 0;
+    font-family: var(--font-body-stack);
+    font-size: var(--step-1);
+    line-height: 1.08;
+  }
+
+  .path-card a {
+    justify-self: start;
+    color: var(--text-primary);
+    font-size: var(--step--1);
+  }
+
+  .path__hint {
+    position: absolute;
+    z-index: 4;
+    right: var(--gutter);
+    bottom: var(--space-5);
+    margin: 0;
+    color: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+    transition: opacity var(--duration-base) ease;
+  }
+
+  .path__hint.is-hidden {
+    opacity: 0;
+  }
+
+  .path__progress {
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--border-default);
+  }
+
+  .path__progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--color-coral);
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform;
+  }
+
+  .path__vertical {
+    width: min(calc(100% - var(--gutter) * 2), var(--container-content));
+    margin: 0 auto;
+    padding: 0 0 var(--space-9);
+    list-style: none;
+  }
+
+  .is-desktop .path__vertical {
+    display: none;
+  }
+
+  .path__vertical li {
+    position: relative;
+    margin-left: var(--space-4);
+    padding: 0 0 var(--space-6) var(--space-6);
+    border-left: 1px solid var(--border-default);
+  }
+
+  .path__vertical li:last-child {
+    border-color: transparent;
+  }
+
+  .path__vertical button {
+    display: grid;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .path__vertical-toggle {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    margin-top: var(--space-2);
+  }
+
+  .path__vertical-toggle i {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .path__vertical-toggle i:last-child {
+    transform: rotate(90deg);
+  }
+
+  .path__vertical li.is-active .path__vertical-toggle i:last-child {
+    transform: rotate(90deg) scaleX(0);
+  }
+
+  .path__vertical-dot {
+    position: absolute;
+    top: 0.35rem;
+    left: -0.5rem;
+    width: 0.95rem;
+    aspect-ratio: 1;
+    border: 2px solid var(--color-coral);
+    border-radius: 50%;
+    background: var(--color-paper);
+  }
+
+  .path__vertical li.is-active .path__vertical-dot {
+    background: var(--color-coral);
+    box-shadow: 0 0 0 5px var(--color-blush);
+  }
+
+  .path__vertical-heading {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .path__vertical-heading > span,
+  .path__vertical-heading small {
+    color: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+  }
+
+  .path__vertical-heading strong {
+    font-size: var(--step-1);
+  }
+
+  .path__vertical [data-vertical-panel] {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 42rem;
+    padding-top: var(--space-5);
+  }
+
+  .path__vertical [data-vertical-panel][hidden] {
+    display: none;
+  }
+
+  .path__vertical [data-vertical-panel] :global(img) {
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+  }
+
+  .path__vertical [data-vertical-panel] p {
+    margin: 0;
+    color: var(--text-muted);
+    font: var(--step--1) var(--font-mono-stack);
+  }
+
+  @media (max-width: 48rem) {
+    .path__intro {
+      padding-block: var(--space-8) var(--space-6);
+    }
+
+    .path__vertical li {
+      padding-left: var(--space-5);
+    }
+  }
+</style>

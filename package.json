@@ -1,53 +1,36 @@
 {
-  "homepage": "https://qrospars.github.io/portfolio/",
-  "name": "qrospars-portfolio",
-  "version": "0.1.0",
+  "name": "quentin-rospars-portfolio",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "@fortawesome/react-fontawesome": "^0.1.14",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.0",
-    "bootstrap": "^4.6.0",
-    "npm": "^7.5.4",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.3",
-    "react-dom": "^17.0.1",
-    "react-medium-image-zoom": "^5.0.0-beta2.6",
-    "react-responsive-masonry": "^2.7.1",
-    "react-scripts": "^5.0.1",
-    "react-scroll-parallax": "^3.2.0",
-    "web-vitals": "^1.1.0"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "test:lighthouse": "lhci autorun"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@astrojs/mdx": "5.0.6",
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "6.4.8",
+    "gsap": "3.15.0",
+    "sharp": "0.35.3"
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0"
+    "@astrojs/check": "0.9.9",
+    "@axe-core/playwright": "4.12.1",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.61.1",
+    "typescript": "6.0.3",
+    "vitest": "3.2.7"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

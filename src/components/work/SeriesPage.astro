@@ -1,0 +1,222 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NextWork from './NextWork.astro';
+import type { WorkPreview } from '@/lib/work';
+import { getDisciplineLabel } from '@/config/disciplines';
+import { withBase } from '@/lib/urls';
+
+interface Props {
+  entry: CollectionEntry<'series'>;
+  pieces: CollectionEntry<'pieces'>[];
+  next: WorkPreview;
+}
+
+const { entry, pieces, next } = Astro.props;
+const title = `${entry.data.title} — Quentin Rospars`;
+---
+
+<BaseLayout title={title} description={entry.data.summary ?? 'Visual work by Quentin Rospars.'}>
+  <article class="series-page">
+    <header class="series-page__header container container--wide">
+      <a class="series-page__back" href={withBase('/work/')}><span aria-hidden="true">←</span> All work</a>
+      <p class="eyebrow eyebrow--accent">Visual series</p>
+      <h1>{entry.data.title}</h1>
+      {entry.data.summary && <p class="lede">{entry.data.summary}</p>}
+      <p class="series-page__disciplines">{entry.data.disciplines.map(getDisciplineLabel).join(' · ')}</p>
+      <div class="series-page__introduction"><slot /></div>
+    </header>
+
+    <div class="series-gallery container container--wide">
+      {pieces.map((piece) => (
+        <article class="piece" id={piece.id} data-reveal>
+          <div class="piece__media">
+            {piece.data.video ? (
+              <video controls autoplay muted loop playsinline preload="metadata" aria-label={piece.data.imageAlt}>
+                <source src={withBase(piece.data.video)} type="video/mp4" />
+              </video>
+            ) : (
+              <Image
+                src={piece.data.image}
+                alt={piece.data.imageAlt}
+                widths={[480, 720, 1100, 1500]}
+                sizes="(max-width: 48rem) calc(100vw - 2.5rem), 44vw"
+                loading="lazy"
+                quality={84}
+              />
+            )}
+          </div>
+          <div class="piece__copy">
+            <p class="eyebrow eyebrow--accent">{piece.data.medium}</p>
+            <h2>{piece.data.title}</h2>
+            <dl>
+              {piece.data.client && <div><dt>Client</dt><dd>{piece.data.client}</dd></div>}
+              {piece.data.year && <div><dt>Year</dt><dd>{piece.data.year}</dd></div>}
+            </dl>
+            {piece.data.description && <p>{piece.data.description}</p>}
+            <a class="piece__anchor" href={`#${piece.id}`} aria-label={`Link to ${piece.data.title}`}>#</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="container container--wide series-page__next">
+      <NextWork item={next} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .series-page {
+    padding-top: clamp(8rem, 15vh, 12rem);
+  }
+
+  .series-page__header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-6);
+    padding-bottom: var(--space-9);
+  }
+
+  .series-page__back {
+    grid-column: 1 / -1;
+    width: fit-content;
+    margin-bottom: var(--space-7);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .series-page__header > .eyebrow,
+  .series-page__header h1,
+  .series-page__header .lede {
+    grid-column: 1 / span 8;
+  }
+
+  .series-page__header h1 {
+    margin: 0;
+    font-size: var(--step-5);
+  }
+
+  .series-page__disciplines {
+    grid-column: 10 / -1;
+    grid-row: 3;
+    align-self: end;
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+  }
+
+  .series-page__introduction {
+    grid-column: 1 / span 7;
+  }
+
+  .series-gallery {
+    display: grid;
+    gap: var(--space-9);
+    padding-bottom: var(--space-10);
+  }
+
+  .piece {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.7fr);
+    gap: clamp(1.5rem, 4vw, 5rem);
+    align-items: start;
+    scroll-margin-top: var(--space-7);
+  }
+
+  .piece:nth-child(even) {
+    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.7fr);
+  }
+
+  .piece:nth-child(even) .piece__media {
+    grid-column: 2;
+  }
+
+  .piece:nth-child(even) .piece__copy {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .piece__media {
+    overflow: hidden;
+    border-radius: var(--radius-small);
+    background: var(--color-paper-deep);
+  }
+
+  .piece__media :global(img),
+  .piece__media video {
+    max-height: 80vh;
+    object-fit: cover;
+  }
+
+  .piece__copy {
+    position: sticky;
+    top: 12vh;
+  }
+
+  .piece__copy h2 {
+    margin-block: var(--space-3) var(--space-5);
+  }
+
+  .piece__copy dl {
+    display: grid;
+    gap: var(--space-2);
+    margin-block: 0 var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+  }
+
+  .piece__copy dl div {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: var(--space-3);
+  }
+
+  .piece__copy dt,
+  .piece__copy dd {
+    margin: 0;
+  }
+
+  .piece__anchor {
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    text-decoration: none;
+  }
+
+  .series-page__next {
+    padding-bottom: var(--space-9);
+  }
+
+  @media (max-width: 48rem) {
+    .series-page__header {
+      grid-template-columns: 1fr;
+    }
+
+    .series-page__header > *,
+    .series-page__disciplines,
+    .series-page__introduction {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .piece,
+    .piece:nth-child(even) {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    .piece:nth-child(even) .piece__media,
+    .piece:nth-child(even) .piece__copy {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .piece__copy {
+      position: static;
+    }
+  }
+</style>

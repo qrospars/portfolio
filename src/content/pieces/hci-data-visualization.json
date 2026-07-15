@@ -1,0 +1,13 @@
+{
+  "title": "Data Visualization in the Field of HCI",
+  "description": "This was a 6-months project where I helped developing a visualization tool to explore more than 50 years of HCI papers. One of the main goals was to analyze the evolution of the interaction types in the HCI research papers.",
+  "year": "2018",
+  "medium": "Data Visualization, UX Design, HCI",
+  "client": "University of Copenhagen",
+  "disciplines": ["dataVisualization", "userResearch"],
+  "image": "../../assets/work/my-universe/hci-data-visualization.png",
+  "imageAlt": "Quote co-occurrence data visualization for Human-Computer Interaction research",
+  "series": "my-universe",
+  "order": 57,
+  "featured": false
+}

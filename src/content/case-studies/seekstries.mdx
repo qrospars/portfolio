@@ -1,0 +1,30 @@
+---
+title: Muscle Fibers Finder
+summary: An image processing application to predict a drug efficiency.
+disciplines: [dataStrategy, aiAgents]
+cover: ../../assets/work/cytoo/cover.png
+coverAlt: SeekStries muscle fiber analysis application
+order: 40
+featured: false
+client: CYTOO
+externalUrl: https://github.com/PierreBlancfat/SeekstriesCytoo
+---
+
+import ProjectImage from '../../components/work/ProjectImage.astro';
+import striationImage from '../../assets/work/cytoo/striation-sample.jpg';
+
+CYTOO company asked me and some of my schoolmates at university to create an image processing tool to analyse many muscular fibers images at once, and find striations within.
+
+You can see an example of an image that they gave us below:
+
+<ProjectImage src={striationImage} alt="Microscope image showing muscular fiber striations" />
+
+We had one full-time month to develop it, and each one of us had specific tasks to accomplish.
+
+We used Python to develop it, even for the graphic interface.
+
+I used LBP patterns and k-means algorithms to recognize striations inside the images, and it worked pretty well. We improved it using machine learning.
+
+You can find the github link below and clone it if you want to test the software:
+
+[https://github.com/PierreBlancfat/SeekstriesCytoo](https://github.com/PierreBlancfat/SeekstriesCytoo)

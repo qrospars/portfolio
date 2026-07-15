@@ -1,0 +1,11 @@
+{
+  "title": "Texture Concept",
+  "year": "2021",
+  "medium": "Generative Art",
+  "disciplines": ["generativeArt", "artDesign"],
+  "image": "../../assets/work/my-universe/texture-concept.png",
+  "imageAlt": "Abstract generative texture concept",
+  "series": "my-universe",
+  "order": 60,
+  "featured": false
+}

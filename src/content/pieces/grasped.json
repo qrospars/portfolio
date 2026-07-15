@@ -1,0 +1,13 @@
+{
+  "title": "Grasped",
+  "description": "The first company I created with two friends. We are working hard to create a mobile app on the side of our full-time jobs, and we expect to launch the beta version of the app around the end of 2022. Brand guidelines, prototyping in Figma, back-end development and the creation of the app using the Ionic framework are some of my responsabilities in this project",
+  "year": "2021-2022",
+  "medium": "UX Design, Full-Stack & Mobile App Development",
+  "client": "Grasped",
+  "disciplines": ["productUx"],
+  "image": "../../assets/work/my-universe/grasped-mobile.png",
+  "imageAlt": "Mobile application interface prototypes for Grasped",
+  "series": "my-universe",
+  "order": 55,
+  "featured": false
+}

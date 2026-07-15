@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/urls';
+---
+
+<BaseLayout title="Page not found — Quentin Rospars" noindex>
+  <section class="not-found container">
+    <p class="eyebrow eyebrow--accent">404</p>
+    <h1>This path ends here.</h1>
+    <a class="button button--filled" href={withBase('/')}>Return home</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 85vh;
+    align-content: center;
+    justify-items: start;
+  }
+
+  h1 {
+    max-width: 14ch;
+    margin-block: var(--space-3) var(--space-7);
+  }
+</style>

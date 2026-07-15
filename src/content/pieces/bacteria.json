@@ -1,0 +1,11 @@
+{
+  "title": "Bacteria",
+  "year": "2021",
+  "medium": "Generative Art, Photography",
+  "disciplines": ["generativeArt", "artDesign"],
+  "image": "../../assets/work/my-universe/bacteria.png",
+  "imageAlt": "Organic generative composition inspired by bacteria",
+  "series": "my-universe",
+  "order": 61,
+  "featured": false
+}

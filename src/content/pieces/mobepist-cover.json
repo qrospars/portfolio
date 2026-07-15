@@ -1,0 +1,13 @@
+{
+  "title": "Mobepist Cover",
+  "description": "The inspiration for this project came from the heat that I felt while travelling. I wanted to make the viewer experience the blurriness coming from high temperature. This has been generated using a set of filters and deformations programmatically applied to a picture.",
+  "year": "2022",
+  "medium": "Generative Art, Abstract, Programmatic Deformation",
+  "client": "SRAPS",
+  "disciplines": ["artDesign", "generativeArt"],
+  "image": "../../assets/work/my-universe/album-cover-concept.png",
+  "imageAlt": "Programmatically distorted abstract album cover concept",
+  "series": "my-universe",
+  "order": 53,
+  "featured": false
+}

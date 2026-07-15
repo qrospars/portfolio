@@ -1,0 +1,13 @@
+{
+  "title": "Molecular Attraction",
+  "description": "This piece has been created using different attractors with their position following a molecule structure.",
+  "year": "2021",
+  "medium": "Generative Art, Abstract",
+  "client": "SRAPS",
+  "disciplines": ["generativeArt", "artDesign"],
+  "image": "../../assets/work/my-universe/molecular-attraction.png",
+  "imageAlt": "Abstract generative composition based on molecular attraction",
+  "series": "my-universe",
+  "order": 52,
+  "featured": true
+}

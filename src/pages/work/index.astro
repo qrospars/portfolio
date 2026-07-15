@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import WorkIndex from '@/components/work/WorkIndex.astro';
+import { getWorkIndex } from '@/lib/work';
+
+const work = await getWorkIndex();
+---
+
+<BaseLayout title="Work — Quentin Rospars" description="Projects and visual work by Quentin Rospars.">
+  <section class="work-page section" aria-labelledby="work-title">
+    <div class="container container--wide">
+      <header class="work-page__header">
+        <p class="eyebrow eyebrow--accent">Projects & visual practice</p>
+        <h1 id="work-title">Work</h1>
+      </header>
+      <WorkIndex items={work} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work-page {
+    padding-top: clamp(9rem, 18vh, 14rem);
+  }
+
+  .work-page__header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    margin-bottom: var(--space-8);
+  }
+
+  .work-page__header > * {
+    grid-column: 1 / span 8;
+  }
+
+  .work-page__header h1 {
+    margin: var(--space-2) 0 0;
+    font-size: var(--step-5);
+  }
+</style>

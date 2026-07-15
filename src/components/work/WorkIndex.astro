@@ -1,0 +1,238 @@
+---
+import { Image } from 'astro:assets';
+import type { WorkPreview } from '@/lib/work';
+import { withBase } from '@/lib/urls';
+
+interface Props {
+  items: WorkPreview[];
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { items, headingLevel: Heading = 'h2' } = Astro.props;
+---
+
+<div class="work-index" data-work-index>
+  <div class="work-index__list">
+    {items.map((item, index) => (
+      <article class="work-row" data-work-row={item.id}>
+        <a href={withBase(item.href)}>
+          <span class="work-row__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span class="work-row__main">
+            <span class="eyebrow eyebrow--accent">{item.kind}</span>
+            <Heading class="work-row__title">{item.title}</Heading>
+            <span class="work-row__summary">{item.summary}</span>
+          </span>
+          <span class="work-row__meta">
+            <span>{item.disciplineLabels.join(' · ')}</span>
+            {item.year && <span>{item.year}</span>}
+          </span>
+          <span class="work-row__arrow" aria-hidden="true">↗</span>
+          <span class="work-row__media">
+            <Image
+              src={item.image}
+              alt={item.imageAlt}
+              widths={[420, 720]}
+              sizes="(max-width: 52rem) calc(100vw - 2.5rem), 1px"
+              loading={index < 2 ? 'eager' : 'lazy'}
+              quality={82}
+            />
+          </span>
+        </a>
+      </article>
+    ))}
+  </div>
+  <aside class="work-index__previews" aria-hidden="true">
+    {items.map((item, index) => (
+      <figure class:list={['work-preview', { 'is-active': index === 0 }]} data-work-preview={item.id}>
+        <Image
+          src={item.image}
+          alt=""
+          widths={[640, 960, 1280]}
+          sizes="42vw"
+          loading={index === 0 ? 'eager' : 'lazy'}
+          quality={84}
+        />
+      </figure>
+    ))}
+  </aside>
+</div>
+
+<script>
+  function initializeWorkIndexes() {
+    document.querySelectorAll<HTMLElement>('[data-work-index]:not([data-ready])').forEach((index) => {
+      index.dataset.ready = 'true';
+      const rows = [...index.querySelectorAll<HTMLElement>('[data-work-row]')];
+      const previews = [...index.querySelectorAll<HTMLElement>('[data-work-preview]')];
+      const activate = (id: string) => {
+        previews.forEach((preview) => preview.classList.toggle('is-active', preview.dataset.workPreview === id));
+      };
+      rows.forEach((row) => {
+        const id = row.dataset.workRow;
+        if (!id) return;
+        row.addEventListener('mouseenter', () => activate(id));
+        row.addEventListener('focusin', () => activate(id));
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initializeWorkIndexes);
+  initializeWorkIndexes();
+</script>
+
+<style>
+  .work-index {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    align-items: start;
+  }
+
+  .work-index__list {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .work-row {
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .work-row a {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) minmax(9rem, 0.45fr) auto;
+    gap: var(--space-5);
+    align-items: center;
+    padding-block: clamp(1.5rem, 2.5vw, 2.5rem);
+    text-decoration: none;
+  }
+
+  .work-row__number {
+    align-self: start;
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+  }
+
+  .work-row__main {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .work-row__title {
+    margin: 0;
+    font-size: var(--step-2);
+    transition: color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+  }
+
+  .work-row__summary {
+    max-width: 34rem;
+    color: var(--text-secondary);
+    font-size: var(--step--1);
+  }
+
+  .work-row__meta {
+    display: grid;
+    align-self: end;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    line-height: 1.4;
+  }
+
+  .work-row__arrow {
+    font-size: var(--step-1);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .work-row a:hover .work-row__title,
+  .work-row a:focus-visible .work-row__title {
+    color: var(--color-coral);
+    transform: translateX(0.25rem);
+  }
+
+  .work-row a:hover .work-row__arrow,
+  .work-row a:focus-visible .work-row__arrow {
+    transform: translate(0.2rem, -0.2rem);
+  }
+
+  .work-row__media {
+    display: none;
+  }
+
+  .work-index__previews {
+    position: sticky;
+    top: 10vh;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius-small);
+    background: var(--color-paper-deep);
+  }
+
+  .work-preview {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+  }
+
+  .work-preview.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .work-preview :global(picture),
+  .work-preview :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .work-preview :global(img) {
+    object-fit: cover;
+  }
+
+  @media (max-width: 62rem) {
+    .work-index {
+      grid-template-columns: 1fr;
+    }
+
+    .work-index__previews {
+      display: none;
+    }
+
+    .work-row a {
+      grid-template-columns: 2rem minmax(0, 1fr) auto;
+    }
+
+    .work-row__meta {
+      grid-column: 2;
+    }
+
+    .work-row__arrow {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+
+    .work-row__media {
+      display: block;
+      grid-column: 1 / -1;
+      margin-top: var(--space-4);
+      overflow: hidden;
+      border-radius: var(--radius-small);
+    }
+
+    .work-row__media :global(img) {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .work-row a {
+      gap: var(--space-3);
+    }
+
+    .work-row__summary {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,163 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NextWork from './NextWork.astro';
+import type { WorkPreview } from '@/lib/work';
+import { getDisciplineLabel } from '@/config/disciplines';
+import { withBase } from '@/lib/urls';
+
+interface Props {
+  entry: CollectionEntry<'caseStudies'>;
+  next: WorkPreview;
+}
+
+const { entry, next } = Astro.props;
+const title = `${entry.data.title} — Quentin Rospars`;
+---
+
+<BaseLayout title={title} description={entry.data.summary}>
+  <article class="case-study">
+    <header class="case-study__header container container--wide">
+      <a class="case-study__back" href={withBase('/work/')}><span aria-hidden="true">←</span> All work</a>
+      <div class="case-study__intro">
+        <p class="eyebrow eyebrow--accent">Case study {entry.data.year && `— ${entry.data.year}`}</p>
+        <h1>{entry.data.title}</h1>
+        <p class="lede">{entry.data.summary}</p>
+      </div>
+      <dl class="case-study__meta">
+        <div>
+          <dt>Disciplines</dt>
+          <dd>{entry.data.disciplines.map(getDisciplineLabel).join(' · ')}</dd>
+        </div>
+        {entry.data.client && <div><dt>Client</dt><dd>{entry.data.client}</dd></div>}
+        {entry.data.role && <div><dt>Role</dt><dd>{entry.data.role}</dd></div>}
+      </dl>
+      <div class="case-study__cover">
+        <Image
+          src={entry.data.cover}
+          alt={entry.data.coverAlt}
+          widths={[720, 1200, 1600, 2200]}
+          sizes="calc(100vw - 2 * var(--gutter))"
+          loading="eager"
+          quality={86}
+        />
+      </div>
+    </header>
+    <div class="case-study__body container container--reading">
+      <slot />
+    </div>
+    <div class="container container--wide case-study__next">
+      <NextWork item={next} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    padding-top: clamp(8rem, 15vh, 12rem);
+  }
+
+  .case-study__header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .case-study__back {
+    grid-column: 1 / -1;
+    width: fit-content;
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .case-study__intro {
+    grid-column: 1 / span 8;
+  }
+
+  .case-study__intro h1 {
+    margin-block: var(--space-4) var(--space-5);
+    font-size: var(--step-4);
+  }
+
+  .case-study__meta {
+    grid-column: 10 / -1;
+    align-self: end;
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .case-study__meta div {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-default);
+  }
+
+  .case-study__meta dt,
+  .case-study__meta dd {
+    margin: 0;
+  }
+
+  .case-study__meta dt {
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+  }
+
+  .case-study__meta dd {
+    margin-top: var(--space-1);
+    font-size: var(--step--1);
+  }
+
+  .case-study__cover {
+    grid-column: 1 / -1;
+    margin-top: var(--space-7);
+    overflow: hidden;
+    border-radius: var(--radius-small);
+    background: var(--color-paper-deep);
+  }
+
+  .case-study__cover :global(img) {
+    max-height: 85vh;
+    object-fit: cover;
+  }
+
+  .case-study__body {
+    padding-block: var(--space-9);
+    font-size: var(--step-0);
+  }
+
+  .case-study__body :global(h2) {
+    margin-block: var(--space-8) var(--space-4);
+    font-size: var(--step-2);
+  }
+
+  .case-study__body :global(p),
+  .case-study__body :global(ul) {
+    margin-bottom: var(--space-5);
+  }
+
+  .case-study__body :global(a) {
+    font-weight: 600;
+  }
+
+  .case-study__next {
+    padding-bottom: var(--space-9);
+  }
+
+  @media (max-width: 52rem) {
+    .case-study__header {
+      grid-template-columns: 1fr;
+    }
+
+    .case-study__back,
+    .case-study__intro,
+    .case-study__meta,
+    .case-study__cover {
+      grid-column: 1;
+    }
+  }
+</style>

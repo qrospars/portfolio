@@ -1,0 +1,14 @@
+{
+  "title": "Motion Matching System",
+  "description": "Another 6-months project where I developed a motion matching system that would create animations based on motion capture records. We recorded different types of animation using a motion capture suit, then we plugged them in a machine learning that generates 3d animations. The model was built from scratch and it was mostly based on the Ubisoft conference on that topic. After building the model, the most difficult part was to make it render smooth animations that could cover all types of animations included in the mobile game we were building with the team.",
+  "year": "2020",
+  "medium": "Game Development, Machine Learning",
+  "client": "Copenhagen Film School",
+  "disciplines": ["aiAgents", "productUx"],
+  "image": "../../assets/work/my-universe/motion-matching.png",
+  "imageAlt": "Motion matching system feature-vector visualization",
+  "video": "/media/motion-matching-loop.mp4",
+  "series": "my-universe",
+  "order": 58,
+  "featured": true
+}

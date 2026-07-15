@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import RiversHero from '@/components/signature/RiversHero.astro';
+import PathTimeline from '@/components/signature/PathTimeline.astro';
+import CrossSection from '@/components/work/CrossSection.astro';
+import { FEATURES } from '@/config/features';
+import { getPathEvents } from '@/lib/path-events';
+import { getFeaturedWork } from '@/lib/work';
+import { withBase } from '@/lib/urls';
+import profileImage from '@/assets/profile/quentin-rospars.jpg';
+
+const featuredWork = await getFeaturedWork(3);
+const pathEvents = FEATURES.pathTimeline ? await getPathEvents() : [];
+---
+
+<BaseLayout>
+  <RiversHero />
+
+  <section id="selected-work" class="section selected-work" aria-labelledby="selected-work-title">
+    <div class="container container--wide">
+      <header class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow eyebrow--accent">01 — A cross-section</p>
+          <h2 id="selected-work-title">Selected work</h2>
+        </div>
+        <a class="button" href={withBase('/work/')}>View all work <span aria-hidden="true">→</span></a>
+      </header>
+      <CrossSection items={featuredWork} />
+    </div>
+  </section>
+
+  {FEATURES.pathTimeline && <PathTimeline events={pathEvents} />}
+
+  <section id="about" class="section home-about" aria-labelledby="about-title">
+    <div class="container container--wide home-about__grid">
+      <div class="home-about__portrait" data-reveal>
+        <Image
+          src={profileImage}
+          alt="Portrait of Quentin Rospars"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 48rem) calc(100vw - 2.5rem), 36vw"
+          loading="lazy"
+          quality={84}
+        />
+      </div>
+      <div class="home-about__copy" data-reveal>
+        <p class="eyebrow eyebrow--accent">02 — About</p>
+        <h2 id="about-title">Art & coding</h2>
+        <div class="stack">
+          <p>I'm a french computer scientist working as a UX optimisation consultant for <a href="https://ecapacity.com/" rel="noreferrer" target="_blank">eCapacity</a>_<a href="https://www.valtech.com" rel="noreferrer" target="_blank">Valtech</a> in Copenhagen.</p>
+          <p>I always have been passionate about Art & Coding, and I try to link these two worlds in my work. My strongest skills are probably data visualization, UX optimization and web development.</p>
+        </div>
+        <a class="button button--filled" href={withBase('/about/')}>More about me <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .selected-work {
+    background: var(--color-paper-deep);
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+    align-items: end;
+    margin-bottom: var(--space-8);
+  }
+
+  .section-heading h2 {
+    margin: var(--space-3) 0 0;
+    font-size: var(--step-4);
+  }
+
+  .home-about__grid {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.8fr) minmax(20rem, 1.2fr);
+    gap: clamp(2rem, 8vw, 9rem);
+    align-items: center;
+  }
+
+  .home-about__portrait {
+    overflow: hidden;
+    border-radius: var(--radius-small);
+    background: var(--color-paper-deep);
+  }
+
+  .home-about__portrait :global(img) {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: saturate(0.75);
+  }
+
+  .home-about__copy h2 {
+    margin-block: var(--space-3) var(--space-6);
+    font-size: var(--step-4);
+  }
+
+  .home-about__copy .stack {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (max-width: 48rem) {
+    .section-heading {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .home-about__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 48.0625rem) {
+    .selected-work {
+      display: grid;
+      min-block-size: 100svh;
+      align-items: center;
+      padding-block: clamp(2.5rem, 5vh, 4rem);
+    }
+
+    .section-heading {
+      margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
+    }
+  }
+</style>

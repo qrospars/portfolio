@@ -1,0 +1,207 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import WorkIndex from '@/components/work/WorkIndex.astro';
+import { getWorkIndex } from '@/lib/work';
+import sampleImage from '@/assets/work/my-universe/album-cover-concept.png';
+
+const work = (await getWorkIndex()).slice(0, 2);
+const colors = [
+  ['Paper', 'paper'],
+  ['Paper deep', 'paper-deep'],
+  ['Surface', 'surface'],
+  ['Ink', 'ink'],
+  ['Ink soft', 'ink-soft'],
+  ['Muted', 'muted'],
+  ['Coral', 'coral'],
+  ['Blush', 'blush'],
+  ['Dark', 'dark'],
+];
+---
+
+<BaseLayout title="Styleguide — Quentin Rospars" description="Living visual-system reference." noindex>
+  <header class="styleguide-hero section">
+    <div class="container container--wide">
+      <p class="eyebrow eyebrow--accent">Internal reference · no index</p>
+      <h1>Visual system</h1>
+      <p class="lede">A living reference for the editorial foundations, reusable patterns, and interaction states of this portfolio.</p>
+    </div>
+  </header>
+
+  <section class="section section--compact" aria-labelledby="colors-title">
+    <div class="container container--wide stack">
+      <div>
+        <p class="eyebrow">01 — Foundations</p>
+        <h2 id="colors-title">Color</h2>
+      </div>
+      <div class="swatches">
+        {colors.map(([label, token]) => (
+          <figure class={`swatch swatch--${token}`}>
+            <div class="swatch__color"></div>
+            <figcaption>{label}<code>--color-{token}</code></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--compact" aria-labelledby="type-title">
+    <div class="container container--wide stack type-samples">
+      <div>
+        <p class="eyebrow">02 — Typography</p>
+        <h2 id="type-title">Type scale</h2>
+      </div>
+      <p class="type-display">Cormorant Garamond gives ideas room to breathe.</p>
+      <p class="type-body">Archivo keeps longer reading clear and unhurried. It is the practical counterweight to the expressive display face.</p>
+      <p class="eyebrow eyebrow--accent">Space Mono · Metadata · 2026</p>
+    </div>
+  </section>
+
+  <section class="section section--compact section--dark" aria-labelledby="controls-title">
+    <div class="container container--wide stack">
+      <div>
+        <p class="eyebrow eyebrow--accent">03 — Controls</p>
+        <h2 id="controls-title">Links and buttons</h2>
+      </div>
+      <div class="cluster">
+        <a href="#work-pattern" class="button">Outline action <span aria-hidden="true">→</span></a>
+        <a href="#media-pattern" class="button button--filled">Filled action</a>
+        <button class="button" disabled>Disabled</button>
+        <a href="#type-title">Editorial text link</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work-pattern" class="section" aria-labelledby="work-title">
+    <div class="container container--wide stack styleguide-work">
+      <div>
+        <p class="eyebrow">04 — Work pattern</p>
+        <h2 id="work-title">Editorial rows</h2>
+      </div>
+      <WorkIndex items={work} headingLevel="h3" />
+    </div>
+  </section>
+
+  <section id="media-pattern" class="section section--compact" aria-labelledby="media-title">
+    <div class="container container--wide editorial-grid media-example">
+      <div class="media-example__copy stack">
+        <p class="eyebrow">05 — Media</p>
+        <h2 id="media-title">Responsive image</h2>
+        <p class="lede">Images live inside a predictable figure pattern, with descriptive alternative text and optional metadata-led captions.</p>
+      </div>
+      <figure class="media-example__figure">
+        <Image src={sampleImage} alt="Red abstract album cover with a thin white geometric form" widths={[480, 768, 1200]} sizes="(max-width: 48rem) calc(100vw - 2.5rem), 50vw" />
+        <figcaption>Example caption · visual study</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--compact" aria-labelledby="timeline-title">
+    <div class="container container--wide stack timeline-pattern">
+      <div>
+        <p class="eyebrow">06 — Path states</p>
+        <h2 id="timeline-title">Timeline interaction</h2>
+      </div>
+      <div class="timeline-example" aria-label="Timeline active and secondary states">
+        <div class="timeline-example__labels" aria-hidden="true">
+          <span class="is-active">Generative art</span>
+          <span>Product & UX</span>
+        </div>
+        <div class="timeline-example__plot" aria-hidden="true">
+          <i></i><i></i>
+          <span class="timeline-example__cursor"></span>
+          <span class="timeline-example__dot"></span>
+          <span class="timeline-example__echo"></span>
+        </div>
+        <article class="timeline-example__card">
+          <Image src={sampleImage} alt="Red abstract album cover with a thin white geometric form" widths={[320, 480]} sizes="18rem" />
+          <div>
+            <p>Visual study · 2022</p>
+            <h3>Active event</h3>
+            <small>Art & design · Generative art</small>
+          </div>
+        </article>
+      </div>
+      <div class="timeline-vertical-example">
+        <span aria-hidden="true"></span>
+        <div><small>2022 · Visual study</small><strong>Vertical fallback event</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="layout-title">
+    <div class="container container--wide stack">
+      <div>
+        <p class="eyebrow">07 — Responsive layout</p>
+        <h2 id="layout-title">Editorial grid</h2>
+      </div>
+      <div class="editorial-grid layout-example" aria-label="Twelve-column layout example">
+        <div>Wide story area</div>
+        <div>Supporting note</div>
+        <div>Metadata</div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .styleguide-hero { padding-top: var(--space-10); border-bottom: 1px solid var(--border-default); }
+  .styleguide-hero h1 { max-width: 10ch; margin-block: var(--space-4) var(--space-6); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--space-4); }
+  .swatch { margin: 0; }
+  .swatch__color { aspect-ratio: 4 / 3; border: 1px solid var(--border-default); border-radius: var(--radius-small); background: var(--swatch); }
+  .swatch figcaption { display: grid; gap: var(--space-1); margin-top: var(--space-2); font-size: var(--step--1); }
+  .swatch code { color: var(--text-muted); font-family: var(--font-mono-stack); }
+  .swatch--paper { --swatch: var(--color-paper); }
+  .swatch--paper-deep { --swatch: var(--color-paper-deep); }
+  .swatch--surface { --swatch: var(--color-surface); }
+  .swatch--ink { --swatch: var(--color-ink); }
+  .swatch--ink-soft { --swatch: var(--color-ink-soft); }
+  .swatch--muted { --swatch: var(--color-muted); }
+  .swatch--coral { --swatch: var(--color-coral); }
+  .swatch--blush { --swatch: var(--color-blush); }
+  .swatch--dark { --swatch: var(--color-dark); }
+  .type-samples { --stack-space: var(--space-6); }
+  .type-display { max-width: 16ch; margin: 0; font-family: var(--font-display-stack); font-size: var(--step-4); line-height: 0.98; }
+  .type-body { max-width: 50ch; margin: 0; font-size: var(--step-1); }
+  .section--dark .button--filled { border-color: var(--color-paper); background: var(--color-paper); color: var(--color-ink); }
+  .styleguide-work { --stack-space: var(--space-8); }
+  .media-example { align-items: center; }
+  .media-example__copy { grid-column: 1 / span 5; }
+  .media-example__figure { grid-column: 7 / -1; margin: 0; }
+  .media-example__figure img { aspect-ratio: 4 / 3; object-fit: cover; }
+  .media-example__figure figcaption { margin-top: var(--space-2); color: var(--text-muted); font: var(--step--1) var(--font-mono-stack); }
+  .layout-example > * { min-height: 10rem; padding: var(--space-4); border: 1px solid var(--border-default); color: var(--text-muted); font: var(--step--1) var(--font-mono-stack); }
+  .layout-example > :first-child { grid-column: span 6; }
+  .layout-example > :nth-child(2) { grid-column: span 4; }
+  .layout-example > :last-child { grid-column: span 2; }
+  .timeline-pattern { --stack-space: var(--space-6); }
+  .timeline-example { position: relative; display: grid; min-height: 24rem; overflow: hidden; border: 1px solid var(--border-default); grid-template-columns: 12rem 1fr; background: var(--color-paper); }
+  .timeline-example__labels { z-index: 2; display: grid; padding: var(--space-7) var(--space-4); grid-template-rows: 1fr 1fr; background: linear-gradient(90deg, var(--color-paper) 82%, transparent); font: var(--step--1) var(--font-mono-stack); }
+  .timeline-example__labels span { align-self: center; color: var(--text-muted); }
+  .timeline-example__labels .is-active { color: var(--color-coral); }
+  .timeline-example__plot { position: relative; }
+  .timeline-example__plot > i { position: absolute; right: 0; left: 0; height: 1px; background: var(--border-default); }
+  .timeline-example__plot > i:first-child { top: 30%; }
+  .timeline-example__plot > i:nth-child(2) { top: 70%; }
+  .timeline-example__cursor { position: absolute; top: 0; bottom: 0; left: 48%; width: 1px; background: var(--color-coral); }
+  .timeline-example__dot, .timeline-example__echo { position: absolute; left: calc(48% - 0.45rem); width: 0.9rem; aspect-ratio: 1; border: 2px solid var(--color-coral); border-radius: 50%; }
+  .timeline-example__dot { top: calc(30% - 0.45rem); background: var(--color-coral); box-shadow: 0 0 0 5px var(--color-blush); }
+  .timeline-example__echo { top: calc(70% - 0.45rem); background: var(--color-paper); }
+  .timeline-example__card { position: absolute; z-index: 3; top: 25%; right: var(--space-5); width: 18rem; overflow: hidden; border: 1px solid var(--border-default); background: var(--color-surface); }
+  .timeline-example__card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .timeline-example__card > div { display: grid; gap: var(--space-2); padding: var(--space-4); }
+  .timeline-example__card p, .timeline-example__card h3 { margin: 0; }
+  .timeline-example__card p, .timeline-example__card small { color: var(--text-muted); font: var(--step--1) var(--font-mono-stack); }
+  .timeline-vertical-example { position: relative; display: flex; gap: var(--space-5); max-width: 32rem; padding: var(--space-4) 0 var(--space-4) var(--space-6); border-left: 1px solid var(--border-default); }
+  .timeline-vertical-example > span { position: absolute; top: 1.25rem; left: -0.5rem; width: 0.95rem; aspect-ratio: 1; border: 2px solid var(--color-coral); border-radius: 50%; background: var(--color-coral); box-shadow: 0 0 0 5px var(--color-blush); }
+  .timeline-vertical-example > div { display: grid; gap: var(--space-2); }
+  .timeline-vertical-example small { color: var(--text-muted); font: var(--step--1) var(--font-mono-stack); }
+  @media (max-width: 48rem) {
+    .media-example__copy, .media-example__figure { grid-column: 1 / -1; }
+    .layout-example > :first-child, .layout-example > :nth-child(2), .layout-example > :last-child { grid-column: span 4; }
+    .timeline-example { grid-template-columns: 1fr; }
+    .timeline-example__labels { display: none; }
+    .timeline-example__card { right: var(--space-4); width: min(18rem, calc(100% - var(--space-8))); }
+  }
+</style>

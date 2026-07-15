@@ -1,0 +1,13 @@
+{
+  "title": "Dashboard Design",
+  "description": "Designing data visualizations and dashboards was one my main roles in Valtech. I designed and created tens of dashboards using Google Data Studio, Power BI, Tableau or even completely custom mades using web technologies or Python.",
+  "year": "2020-Now",
+  "medium": "Dashboard, Data Visualization",
+  "client": "Multiple",
+  "disciplines": ["dataVisualization", "dataStrategy"],
+  "image": "../../assets/work/my-universe/dashboard-design.png",
+  "imageAlt": "Collection of dashboard and data visualization interface designs",
+  "series": "my-universe",
+  "order": 51,
+  "featured": false
+}

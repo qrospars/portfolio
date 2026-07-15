@@ -1,0 +1,50 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import CaseStudyPage from '@/components/work/CaseStudyPage.astro';
+import SeriesPage from '@/components/work/SeriesPage.astro';
+import { getSeriesPieces, getWorkIndex } from '@/lib/work';
+
+export async function getStaticPaths() {
+  const [caseStudies, series] = await Promise.all([
+    getCollection('caseStudies', ({ data }) => !data.draft),
+    getCollection('series', ({ data }) => !data.draft),
+  ]);
+  return [
+    ...caseStudies.map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry, kind: 'caseStudy' as const },
+    })),
+    ...series.map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry, kind: 'series' as const },
+    })),
+  ];
+}
+
+const slug = Astro.params.slug;
+if (!slug) throw new Error('A work slug is required.');
+
+type WorkRouteProps =
+  | { entry: CollectionEntry<'caseStudies'>; kind: 'caseStudy' }
+  | { entry: CollectionEntry<'series'>; kind: 'series' };
+
+const props = Astro.props as WorkRouteProps;
+const { entry, kind } = props;
+const work = await getWorkIndex();
+const currentIndex = work.findIndex((item) => item.id === slug);
+const next = work[(currentIndex + 1) % work.length]!;
+const { Content } = await render(entry);
+const pieces = kind === 'series' ? await getSeriesPieces(entry.id) : [];
+---
+
+{
+  kind === 'caseStudy' ? (
+    <CaseStudyPage entry={entry} next={next}>
+      <Content />
+    </CaseStudyPage>
+  ) : (
+    <SeriesPage entry={entry} pieces={pieces} next={next}>
+      <Content />
+    </SeriesPage>
+  )
+}

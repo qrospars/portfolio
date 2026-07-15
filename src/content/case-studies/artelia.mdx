@@ -1,0 +1,39 @@
+---
+title: Maritime Traffic Tool
+summary: Explore the maritime traffic in the Abidjan's port.
+year: "2018"
+disciplines: [dataVisualization, dataStrategy]
+cover: ../../assets/work/artelia/cover.jpg
+coverAlt: Maritime traffic visualization over the port of Abidjan
+order: 10
+featured: true
+client: Artelia and Total groups
+externalUrl: https://www.arteliagroup.com/en
+---
+
+import ProjectImage from '../../components/work/ProjectImage.astro';
+import mapImage from '../../assets/work/artelia/map.png';
+import databaseImage from '../../assets/work/artelia/database.png';
+import dashboardOne from '../../assets/work/artelia/dashboard-1.png';
+import dashboardTwo from '../../assets/work/artelia/dashboard-2.png';
+import dashboardThree from '../../assets/work/artelia/dashboard-3.png';
+import dashboardFour from '../../assets/work/artelia/dashboard-4.png';
+
+In 2018, I developed a maritime traffic tool for Artelia and Total groups. They asked me to make in 3 months a complete tool that would analyse AIS data, turn it into a database and finally analyse it using a web-based application.
+
+I used web technologies like d3.js for making charts and mapbox / leaflet to create the maps.
+
+<ProjectImage src={mapImage} alt="Maritime traffic map and analytical interface" />
+
+The database was created using web scraping techniques, where I gathered information on about 1300 ships on three different websites. I mostly used BeautifulSoup, a Python's library, to do the web scraping.
+
+<ProjectImage src={databaseImage} alt="Ship database interface created for the maritime traffic tool" />
+
+I am really proud of the final result. The data visualizations created during this project still inspires me today, and I would love to design something more creative out of those. Due to confidentiality, I cannot elaborate further on the behind the scenes or the final purpose, but you will find some screenshots below:
+
+<ProjectImage src={dashboardOne} alt="Maritime traffic dashboard overview" />
+<ProjectImage src={dashboardTwo} alt="Maritime traffic distribution visualization" />
+<ProjectImage src={dashboardThree} alt="Maritime traffic analysis charts" />
+<ProjectImage src={dashboardFour} alt="Detailed vessel traffic visualization" />
+
+[Artelia Group](https://www.arteliagroup.com/en)

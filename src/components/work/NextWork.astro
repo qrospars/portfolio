@@ -1,0 +1,59 @@
+---
+import type { WorkPreview } from '@/lib/work';
+import { withBase } from '@/lib/urls';
+
+interface Props {
+  item: WorkPreview;
+}
+
+const { item } = Astro.props;
+---
+
+<aside class="next-work" aria-label="Next work">
+  <a href={withBase(item.href)}>
+    <span class="eyebrow eyebrow--accent">Next — {item.kind}</span>
+    <span class="next-work__title">{item.title}</span>
+    <span class="next-work__arrow" aria-hidden="true">→</span>
+  </a>
+</aside>
+
+<style>
+  .next-work {
+    border-block: 1px solid var(--border-default);
+  }
+
+  .next-work a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-3) var(--space-5);
+    align-items: center;
+    padding-block: var(--space-7);
+    text-decoration: none;
+  }
+
+  .next-work .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .next-work__title {
+    font-family: var(--font-display-stack);
+    font-size: var(--step-3);
+    line-height: 1;
+    transition: color var(--duration-base) var(--ease-out);
+  }
+
+  .next-work__arrow {
+    font-size: var(--step-3);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .next-work a:hover .next-work__title,
+  .next-work a:focus-visible .next-work__title {
+    color: var(--color-coral);
+  }
+
+  .next-work a:hover .next-work__arrow,
+  .next-work a:focus-visible .next-work__arrow {
+    transform: translateX(0.5rem);
+  }
+</style>

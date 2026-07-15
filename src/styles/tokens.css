@@ -1,0 +1,74 @@
+:root {
+  color-scheme: light;
+
+  --color-paper: #f7f6f3;
+  --color-paper-deep: #f0eee8;
+  --color-surface: #fffefa;
+  --color-ink: #181817;
+  --color-ink-soft: #56544f;
+  --color-muted: #6f6b64;
+  --color-line: #d9d6ce;
+  --color-coral: #c83c45;
+  --color-coral-soft: #f2a2a6;
+  --color-blush: #f8e5e3;
+  --color-dark: #151515;
+  --color-dark-line: #30302e;
+  --color-dark-muted: #b6b2aa;
+  --color-white: #ffffff;
+
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-ink-soft);
+  --text-muted: var(--color-muted);
+  --text-accent: var(--color-coral);
+  --background-page: var(--color-paper);
+  --background-surface: var(--color-surface);
+  --border-default: var(--color-line);
+  --focus-ring: var(--color-coral);
+
+  --font-display-stack: var(--font-display), Georgia, serif;
+  --font-body-stack: var(--font-body), Arial, sans-serif;
+  --font-mono-stack: var(--font-mono), monospace;
+
+  --step--1: clamp(0.78rem, 0.75rem + 0.12vw, 0.88rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.08rem + 0.58vw, 1.6rem);
+  --step-2: clamp(1.55rem, 1.28rem + 1.18vw, 2.35rem);
+  --step-3: clamp(2.1rem, 1.55rem + 2.4vw, 3.7rem);
+  --step-4: clamp(3rem, 1.9rem + 4.7vw, 6.25rem);
+  --step-5: clamp(4rem, 2rem + 8vw, 10.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --space-10: 10rem;
+
+  --gutter: clamp(1.25rem, 3vw, 3.5rem);
+  --container-wide: 92rem;
+  --container-content: 74rem;
+  --container-reading: 48rem;
+
+  --radius-small: 0.3rem;
+  --radius-medium: 0.75rem;
+  --radius-large: 1.25rem;
+  --radius-round: 999px;
+
+  --border-thin: 1px;
+  --border-strong: 2px;
+
+  --duration-fast: 140ms;
+  --duration-base: 280ms;
+  --duration-slow: 700ms;
+  --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --z-canvas: 0;
+  --z-content: 1;
+  --z-header: 20;
+  --z-skip: 100;
+}

@@ -1,0 +1,96 @@
+---
+---
+
+<section class="rivers-hero" aria-labelledby="hero-title" data-rivers-hero>
+  <canvas class="rivers-hero__canvas" aria-hidden="true" data-rivers-canvas></canvas>
+  <div class="rivers-hero__content">
+    <h1 id="hero-title">Hi, I'm Quentin<span aria-hidden="true">.</span></h1>
+    <p class="rivers-hero__intro">You can find some of my work here; have a look _</p>
+  </div>
+</section>
+
+<script>
+  import { initializeRivers } from '@/lib/rivers';
+
+  let cleanup: (() => void) | undefined;
+  let startFrame = 0;
+  function startRivers() {
+    cancelAnimationFrame(startFrame);
+    cleanup?.();
+    const canvas = document.querySelector<HTMLCanvasElement>('[data-rivers-canvas]');
+    if (!canvas) return;
+    const controller = initializeRivers(canvas);
+    cleanup = controller.destroy;
+  }
+  function scheduleRivers() {
+    cancelAnimationFrame(startFrame);
+    // Let the critical hero copy paint before the non-critical canvas starts.
+    startFrame = requestAnimationFrame(() => {
+      startFrame = requestAnimationFrame(() => {
+        startRivers();
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', scheduleRivers);
+  document.addEventListener('astro:before-swap', () => {
+    cancelAnimationFrame(startFrame);
+    cleanup?.();
+  });
+  scheduleRivers();
+</script>
+
+<style>
+  .rivers-hero {
+    position: relative;
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    overflow: hidden;
+    padding: clamp(6rem, 12vh, 9rem) var(--gutter) var(--space-7);
+    isolation: isolate;
+  }
+
+  .rivers-hero__canvas {
+    position: absolute;
+    z-index: var(--z-canvas);
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(circle at 50% 50%, transparent 0 24%, rgb(200 60 69 / 7%) 24.2% 24.35%, transparent 24.55%),
+      repeating-radial-gradient(circle at 50% 50%, transparent 0 2.4rem, rgb(24 24 23 / 3%) 2.45rem 2.5rem);
+  }
+
+  .rivers-hero::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background: radial-gradient(circle at center, rgb(247 246 243 / 78%) 0 18%, transparent 55%);
+    content: '';
+    pointer-events: none;
+  }
+
+  .rivers-hero__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: var(--step-5);
+  }
+
+  h1 span {
+    color: var(--color-coral);
+  }
+
+  .rivers-hero__intro {
+    margin: var(--space-5) 0 0;
+    font-weight: 600;
+  }
+
+</style>
