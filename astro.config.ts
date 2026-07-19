@@ -8,6 +8,7 @@ export default defineConfig({
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   server: {
+    host: '127.0.0.1',
     port: 4321,
   },
   vite: {

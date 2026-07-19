@@ -7,16 +7,17 @@ const pages = [
   '/portfolio/work/artelia/',
   '/portfolio/work/my-universe/',
   '/portfolio/about/',
+  '/portfolio/contact/',
 ];
 
 test.describe('portfolio', () => {
-  test('publishes the editorial work architecture and curated Path', async ({ page }) => {
+  test('publishes the editorial work architecture and complete dated Path', async ({ page }) => {
     await page.goto('/portfolio/');
     await expect(page.getByRole('heading', { level: 1, name: /Hi, I'm Quentin/ })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: 'Selected work' })).toBeVisible();
     await expect(page.locator('[data-path-timeline]')).toHaveCount(1);
     await expect(page.getByRole('heading', { level: 2, name: 'A path, not a ladder.' })).toBeVisible();
-    await expect(page.locator('[data-event-dot]')).toHaveCount(9);
+    await expect(page.locator('[data-event-dot]')).toHaveCount(16);
     await expect(page.locator('[data-path-lane-label]')).toHaveCount(10);
   });
 
@@ -28,12 +29,20 @@ test.describe('portfolio', () => {
       await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible();
     }
     await expect(page.locator('.rivers-hero__nav')).toHaveCount(0);
-    await expect(page.locator('.cross-card')).toHaveCount(3);
+    await expect(page.locator('.cross-card')).toHaveCount(2);
     await expect(page.locator('.cross-card')).toContainText([
-      'Maritime Traffic Tool',
-      'Molecular Attraction',
-      'Motion Matching System',
+      'Rebuilding a Consultancy Website in 15 Days',
+      'KPI Frameworks for UX Optimisations',
     ]);
+    await expect(page.getByRole('link', { name: 'View all work' })).toHaveCount(0);
+    await expect(page.getByRole('link', { name: 'Browse the archive by project' })).toHaveAttribute('href', '/portfolio/work/');
+
+    const selectedImages = page.locator('.cross-card__media img');
+    await expect(selectedImages).toHaveCount(2);
+    for (const image of await selectedImages.all()) {
+      const box = await image.boundingBox();
+      expect((box?.width ?? 0) / (box?.height ?? 1)).toBeCloseTo(16 / 9, 1);
+    }
 
     if (testInfo.project.name !== 'mobile') {
       const viewport = page.viewportSize();
@@ -83,12 +92,14 @@ test.describe('portfolio', () => {
     await firstDot.focus();
     await expect(page.locator('[data-event-card]:visible h3')).toHaveText('Designs & Concept Art');
     await firstDot.press('ArrowRight');
-    await expect(page.locator('[data-event-card]:visible h3')).toHaveText('Maritime Traffic Tool');
-    await expect(page.locator('[data-path-lane-label="dataVisualization"]')).toHaveClass(/is-active/);
+    await expect(page.locator('[data-event-card]:visible h3')).toHaveText('Muscle Fibers Finder');
+    await expect(page.locator('[data-path-lane-label="aiAgents"]')).toHaveClass(/is-active/);
   });
 
   test('supports work browsing, deep links, and browser history', async ({ page }) => {
     await page.goto('/portfolio/work/');
+    await expect(page.getByRole('heading', { level: 2, name: 'Case studies' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: 'Visual series' })).toBeVisible();
     const firstWork = page.getByRole('link', { name: /Maritime Traffic Tool/ });
     await firstWork.focus();
     await expect(page.locator('[data-work-preview="artelia"]')).toHaveClass(/is-active/);
@@ -105,8 +116,10 @@ test.describe('portfolio', () => {
       ['/portfolio/', "Hi, I'm Quentin", 'https://qrospars.github.io/portfolio/'],
       ['/portfolio/work/', 'Work', 'https://qrospars.github.io/portfolio/work/'],
       ['/portfolio/work/artelia/', 'Maritime Traffic Tool', 'https://qrospars.github.io/portfolio/work/artelia/'],
+      ['/portfolio/work/rebuilding-consultancy-website/', 'Rebuilding a Consultancy Website in 15 Days', 'https://qrospars.github.io/portfolio/work/rebuilding-consultancy-website/'],
       ['/portfolio/work/my-universe/#dashboard-design', 'My Universe', 'https://qrospars.github.io/portfolio/work/my-universe/'],
       ['/portfolio/about/', "Hi, I'm Quentin", 'https://qrospars.github.io/portfolio/about/'],
+      ['/portfolio/contact/', 'Contact', 'https://qrospars.github.io/portfolio/contact/'],
     ] as const;
 
     for (const [path, heading, canonical] of routes) {
@@ -125,6 +138,16 @@ test.describe('portfolio', () => {
     await expect(page.locator('#dashboard-design')).toBeVisible();
   });
 
+  test('keeps base-aware primary navigation and route focus predictable', async ({ page }) => {
+    await page.goto('/portfolio/work/my-universe/#dashboard-design');
+    const primaryNavigation = page.locator('[data-nav]');
+    await expect(primaryNavigation.locator('a').filter({ hasText: /^Work$/ })).toHaveAttribute('aria-current', 'page');
+    await expect(primaryNavigation.locator('a').filter({ hasText: /^Home$/ })).not.toHaveAttribute('aria-current', 'page');
+    await primaryNavigation.getByRole('link', { name: 'Work' }).click();
+    await expect(page).toHaveURL(/\/portfolio\/work\/$/);
+    await expect(page.getByRole('heading', { level: 1, name: 'Work' })).toBeFocused();
+  });
+
   test('opens the mobile navigation with an accessible state', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'mobile');
     await page.goto('/portfolio/');
@@ -133,6 +156,27 @@ test.describe('portfolio', () => {
     await menu.click();
     await expect(menu).toHaveAttribute('aria-expanded', 'true');
     await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible();
+  });
+
+  test('uses a persistent, route-based Contact path without duplicated About copy', async ({ page }) => {
+    await page.goto('/portfolio/about/');
+    await expect(page.locator('main')).not.toContainText("If you think I am someone interesting to talk to, don't hesitate");
+    const header = page.locator('[data-header]');
+    await expect(header).toHaveCSS('position', 'fixed');
+    await page.evaluate(() => window.scrollTo(0, 120));
+    await expect(header).toHaveAttribute('data-scrolled', '');
+
+    await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Contact' }).click();
+    await expect(page).toHaveURL(/\/portfolio\/contact\/$/);
+    await expect(page.getByRole('heading', { level: 1, name: 'Contact' })).toBeVisible();
+    await expect(page.getByRole('link', { name: /rospars\.quentin@outlook\.com/ })).toHaveAttribute('href', 'mailto:rospars.quentin@outlook.com');
+  });
+
+  test('uses editorial actions instead of rounded pills', async ({ page }) => {
+    await page.goto('/portfolio/');
+    const aboutAction = page.getByRole('link', { name: 'More about me' });
+    await expect(aboutAction).toHaveCSS('border-radius', '0px');
+    await expect(aboutAction).toHaveCSS('border-top-width', '0px');
   });
 
   test('uses a single-expand vertical Path on mobile', async ({ page }, testInfo) => {
@@ -165,7 +209,7 @@ test.describe('portfolio', () => {
     await expect(page.getByRole('link', { name: /Maritime Traffic Tool/ })).toBeVisible();
     await page.goto('/portfolio/');
     await expect(page.getByRole('heading', { level: 2, name: 'A path, not a ladder.' })).toBeVisible();
-    await expect(page.locator('[data-vertical-panel]')).toHaveCount(9);
+    await expect(page.locator('[data-vertical-panel]')).toHaveCount(16);
     await expect(page.locator('[data-vertical-event]').filter({ hasText: 'Designs & Concept Art' })).toBeVisible();
     await context.close();
   });

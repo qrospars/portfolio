@@ -22,7 +22,7 @@ const title = `${entry.data.title} — Quentin Rospars`;
     <header class="series-page__header container container--wide">
       <a class="series-page__back" href={withBase('/work/')}><span aria-hidden="true">←</span> All work</a>
       <p class="eyebrow eyebrow--accent">Visual series</p>
-      <h1>{entry.data.title}</h1>
+      <h1 tabindex="-1" data-route-heading>{entry.data.title}</h1>
       {entry.data.summary && <p class="lede">{entry.data.summary}</p>}
       <p class="series-page__disciplines">{entry.data.disciplines.map(getDisciplineLabel).join(' · ')}</p>
       <div class="series-page__introduction"><slot /></div>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PROFILE } from '@/config/profile';
+---
+
+<BaseLayout title="Contact — Quentin Rospars" description={PROFILE.defaultDescription}>
+  <section class="contact-page section" aria-labelledby="contact-title">
+    <div class="container container--wide contact-page__grid">
+      <header>
+        <p class="eyebrow eyebrow--accent">Contact</p>
+        <h1 id="contact-title" tabindex="-1" data-route-heading>Contact</h1>
+      </header>
+      <div class="contact-page__body stack">
+        <p class="lede">If you think I am someone interesting to talk to, don't hesitate to send me an email.</p>
+        <a class="contact-page__email" href="mailto:rospars.quentin@outlook.com">rospars.quentin@outlook.com <span aria-hidden="true">↗</span></a>
+        <nav class="contact-page__socials" aria-label="Social links">
+          <a href="https://www.linkedin.com/in/quentin-rospars-a073b6150/" rel="noreferrer" target="_blank">LinkedIn</a>
+          <a href="https://www.instagram.com/quentin_rsprs/" rel="noreferrer" target="_blank">Instagram</a>
+          <a href="https://github.com/qrospars" rel="noreferrer" target="_blank">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    min-height: 100svh;
+    padding-top: clamp(9rem, 18vh, 14rem);
+  }
+
+  .contact-page__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-7);
+  }
+
+  .contact-page__grid > * {
+    grid-column: 1 / span 8;
+  }
+
+  h1 {
+    margin: var(--space-3) 0 0;
+    font-size: var(--step-5);
+  }
+
+  .contact-page__body {
+    --stack-space: var(--space-6);
+    max-width: 44rem;
+  }
+
+  .contact-page__email {
+    width: fit-content;
+    color: var(--text-primary);
+    font-family: var(--font-display-stack);
+    font-size: var(--step-3);
+    line-height: 1.08;
+    text-decoration-thickness: 1px;
+  }
+
+  .contact-page__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 48rem) {
+    .contact-page__grid > * {
+      grid-column: 1 / -1;
+    }
+
+    .contact-page__email {
+      overflow-wrap: anywhere;
+    }
+  }
+</style>

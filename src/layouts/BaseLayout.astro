@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
 import Header from '@/components/navigation/Header.astro';
 import Footer from '@/components/navigation/Footer.astro';
+import { PROFILE } from '@/config/profile';
 import '@/styles/global.css';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 
 const {
   title = 'Quentin Rospars — Portfolio',
-  description = 'Portfolio of Quentin Rospars.',
+  description = PROFILE.defaultDescription,
   image,
   noindex = false,
 } = Astro.props;
@@ -77,6 +78,12 @@ const socialImage = image ? new URL(image, Astro.site) : undefined;
       }
       document.addEventListener('astro:page-load', initializeReveals);
       initializeReveals();
+
+      function restoreRouteFocus() {
+        if (document.activeElement !== document.body) return;
+        document.querySelector<HTMLElement>('[data-route-heading]')?.focus({ preventScroll: true });
+      }
+      document.addEventListener('astro:after-swap', restoreRouteFocus);
     </script>
   </body>
 </html>

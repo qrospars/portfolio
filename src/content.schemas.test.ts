@@ -49,21 +49,28 @@ describe('content authoring schemas', () => {
     }).success).toBe(true);
   });
 
-  it('publishes the nine curated Path references in a stable order', () => {
+  it('publishes every dated work on the Path in a stable editorial order', () => {
     const milestones = Object.values(milestoneModules).sort((a, b) => a.order - b.order);
-    expect(milestones).toHaveLength(9);
+    expect(milestones).toHaveLength(16);
     expect(milestones.every(({ published }) => published)).toBe(true);
-    expect(new Set(milestones.map(({ order }) => order).values()).size).toBe(9);
+    expect(new Set(milestones.map(({ order }) => order).values()).size).toBe(16);
     expect(milestones.map(({ workId }) => workId)).toEqual([
       'pieces:designs-concept-art',
+      'caseStudies:seekstries',
       'caseStudies:artelia',
+      'pieces:hci-data-visualization',
       'caseStudies:interaction-research',
       'pieces:dashboard-design',
+      'caseStudies:kpi-frameworks',
       'pieces:motion-matching-system',
+      'pieces:black-hole-concept',
       'pieces:molecular-attraction',
+      'pieces:texture-concept',
+      'pieces:bacteria',
       'pieces:grasped',
       'pieces:mobepist-cover',
       'pieces:diversity-inclusion-report',
+      'caseStudies:rebuilding-consultancy-website',
     ]);
   });
 

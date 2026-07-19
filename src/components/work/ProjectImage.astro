@@ -10,9 +10,10 @@ interface Props {
 }
 
 const { src, alt, caption, eager = false } = Astro.props;
+const isPortrait = src.height > src.width;
 ---
 
-<figure class="project-image">
+<figure class:list={['project-image', { 'project-image--portrait': isPortrait }]}>
   <Image
     src={src}
     alt={alt}
@@ -37,6 +38,10 @@ const { src, alt, caption, eager = false } = Astro.props;
     background: var(--color-paper-deep);
   }
 
+  .project-image--portrait {
+    width: min(32vw, 25rem);
+  }
+
   figcaption {
     max-width: 42rem;
     margin-top: var(--space-3);
@@ -44,5 +49,11 @@ const { src, alt, caption, eager = false } = Astro.props;
     font-family: var(--font-mono-stack);
     font-size: var(--step--1);
     line-height: 1.5;
+  }
+
+  @media (max-width: 52rem) {
+    .project-image--portrait {
+      width: min(72vw, 25rem);
+    }
   }
 </style>

@@ -20,6 +20,17 @@ export interface WorkPreview {
 
 export type WorkPreviewInput = Omit<WorkPreview, 'disciplineLabels'>;
 
+/**
+ * The homepage is an intentionally curated cross-section, not a query whose
+ * result should change when unrelated work is added. Keep these IDs stable.
+ */
+export const HOMEPAGE_FEATURED_WORK_IDS = [
+  'rebuilding-consultancy-website',
+  'kpi-frameworks',
+] as const;
+
+type FeaturedWorkId = typeof HOMEPAGE_FEATURED_WORK_IDS[number];
+
 const published = <T extends { data: { draft: boolean } }>(entry: T) => !entry.data.draft;
 
 function labels(ids: DisciplineId[]): string[] {
@@ -105,6 +116,32 @@ export async function getFeaturedWork(limit = 6): Promise<WorkPreview[]> {
   }));
 
   return sortWorkPreviews([...casePreviews, ...pieces.map(piecePreview)]).slice(0, limit);
+}
+
+/**
+ * Fails loudly if the explicitly curated homepage selection is accidentally
+ * changed. A blank cross-section is never a useful fallback for visitors.
+ */
+export function validateHomepageFeaturedWork(items: WorkPreview[]): WorkPreview[] {
+  const expected = new Set<string>(HOMEPAGE_FEATURED_WORK_IDS);
+  const actual = items.filter((item) => expected.has(item.id));
+  const unexpected = items.filter((item) => !expected.has(item.id));
+  const missing = HOMEPAGE_FEATURED_WORK_IDS.filter((id) => !actual.some((item) => item.id === id));
+
+  if (missing.length > 0 || unexpected.length > 0 || actual.length !== HOMEPAGE_FEATURED_WORK_IDS.length) {
+    throw new Error(
+      `Homepage featured work must be exactly ${HOMEPAGE_FEATURED_WORK_IDS.join(', ')}. `
+      + `Missing: ${missing.join(', ') || 'none'}. `
+      + `Unexpected: ${unexpected.map((item) => item.id).join(', ') || 'none'}.`,
+    );
+  }
+
+  const byId = new Map(actual.map((item) => [item.id, item]));
+  return HOMEPAGE_FEATURED_WORK_IDS.map((id) => byId.get(id as FeaturedWorkId)!);
+}
+
+export async function getHomepageFeaturedWork(): Promise<WorkPreview[]> {
+  return validateHomepageFeaturedWork(await getFeaturedWork());
 }
 
 export async function getSeriesPieces(seriesId: string): Promise<CollectionEntry<'pieces'>[]> {

@@ -18,7 +18,9 @@ const orderedWorkSchema = z.object({
 export const caseStudyAuthoringSchema = orderedWorkSchema.extend({
   summary: z.string(),
   client: z.string().optional(),
+  context: z.string().optional(),
   role: z.string().optional(),
+  tools: z.array(z.string()).min(1).optional(),
   externalUrl: z.url().optional(),
 });
 

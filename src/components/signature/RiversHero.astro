@@ -1,11 +1,12 @@
 ---
+import { PROFILE } from '@/config/profile';
 ---
 
 <section class="rivers-hero" aria-labelledby="hero-title" data-rivers-hero>
   <canvas class="rivers-hero__canvas" aria-hidden="true" data-rivers-canvas></canvas>
   <div class="rivers-hero__content">
-    <h1 id="hero-title">Hi, I'm Quentin<span aria-hidden="true">.</span></h1>
-    <p class="rivers-hero__intro">You can find some of my work here; have a look _</p>
+    <h1 id="hero-title" tabindex="-1" data-route-heading>Hi, I'm Quentin<span aria-hidden="true">.</span></h1>
+    <p class="rivers-hero__intro">{PROFILE.positioning}</p>
   </div>
 </section>
 
@@ -89,6 +90,7 @@
   }
 
   .rivers-hero__intro {
+    max-width: 42rem;
     margin: var(--space-5) 0 0;
     font-weight: 600;
   }

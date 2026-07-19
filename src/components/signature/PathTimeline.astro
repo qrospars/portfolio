@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { DISCIPLINES, DISCIPLINE_IDS, getDisciplineLabel } from '@/config/disciplines';
 import { buildTimelineLayout } from '@/lib/timeline';
 import type { TimelineEvent } from '@/lib/path-events';
+import { withBase } from '@/lib/urls';
 
 interface Props {
   events: TimelineEvent[];
@@ -175,6 +176,10 @@ const years = [...new Set(layout.yearMarkers.map(({ year }) => year))];
       </li>
     ))}
   </ol>
+
+  <div class="container container--wide path__archive">
+    <a class="button" href={withBase('/work/')}>Browse the archive by project <span aria-hidden="true">→</span></a>
+  </div>
 </section>
 
 <script>
@@ -569,6 +574,10 @@ const years = [...new Set(layout.yearMarkers.map(({ year }) => year))];
     margin: 0;
     color: var(--text-muted);
     font: var(--step--1) var(--font-mono-stack);
+  }
+
+  .path__archive {
+    padding-block: var(--space-7) var(--space-9);
   }
 
   @media (max-width: 48rem) {

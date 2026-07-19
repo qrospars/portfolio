@@ -179,13 +179,12 @@ h3 {
 
 .button {
   display: inline-flex;
-  min-height: 2.75rem;
   align-items: center;
-  justify-content: center;
   gap: var(--space-2);
-  padding: 0.65rem 1.15rem;
-  border: var(--border-thin) solid currentColor;
-  border-radius: var(--radius-round);
+  padding-block: var(--space-2);
+  border: 0;
+  border-bottom: var(--border-thin) solid currentColor;
+  border-radius: 0;
   background: transparent;
   color: inherit;
   font-size: var(--step--1);
@@ -193,17 +192,31 @@ h3 {
   letter-spacing: 0.05em;
   text-decoration: none;
   text-transform: uppercase;
-  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+  transition: color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
 }
 
 .button:hover {
-  background: var(--color-ink);
-  color: var(--color-paper);
-  transform: translateY(-2px);
+  border-color: var(--color-coral);
+  background: transparent;
+  color: var(--color-coral);
+  transform: none;
+}
+
+.button > span[aria-hidden='true'] {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.button:hover > span[aria-hidden='true'],
+.button:focus-visible > span[aria-hidden='true'] {
+  transform: translateX(var(--space-2));
 }
 
 .button--filled {
-  border-color: var(--color-ink);
+  min-height: 2.75rem;
+  justify-content: center;
+  padding: 0.65rem 1.15rem;
+  border: var(--border-thin) solid var(--color-ink);
+  border-radius: var(--radius-control);
   background: var(--color-ink);
   color: var(--color-paper);
 }
@@ -211,6 +224,7 @@ h3 {
 .button--filled:hover {
   background: var(--color-coral);
   border-color: var(--color-coral);
+  color: var(--color-paper);
 }
 
 .button:disabled,
@@ -247,14 +261,12 @@ h3 {
   border: 0;
 }
 
-[data-reveal] {
-  opacity: 0;
+[data-reveal][data-reveal-ready] {
   transform: translateY(1.25rem);
-  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+  transition: transform var(--duration-slow) var(--ease-out);
 }
 
-[data-reveal].is-visible {
-  opacity: 1;
+[data-reveal][data-reveal-ready].is-visible {
   transform: none;
 }
 
@@ -282,8 +294,7 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 
-  [data-reveal] {
-    opacity: 1;
+  [data-reveal][data-reveal-ready] {
     transform: none;
   }
 }

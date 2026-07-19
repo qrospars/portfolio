@@ -22,16 +22,20 @@ const title = `${entry.data.title} — Quentin Rospars`;
       <a class="case-study__back" href={withBase('/work/')}><span aria-hidden="true">←</span> All work</a>
       <div class="case-study__intro">
         <p class="eyebrow eyebrow--accent">Case study {entry.data.year && `— ${entry.data.year}`}</p>
-        <h1>{entry.data.title}</h1>
+        <h1 tabindex="-1" data-route-heading>{entry.data.title}</h1>
         <p class="lede">{entry.data.summary}</p>
       </div>
       <dl class="case-study__meta">
+        {entry.data.year && <div><dt>Year</dt><dd>{entry.data.year}</dd></div>}
         <div>
           <dt>Disciplines</dt>
           <dd>{entry.data.disciplines.map(getDisciplineLabel).join(' · ')}</dd>
         </div>
         {entry.data.client && <div><dt>Client</dt><dd>{entry.data.client}</dd></div>}
+        {entry.data.context && <div><dt>Context</dt><dd>{entry.data.context}</dd></div>}
         {entry.data.role && <div><dt>Role</dt><dd>{entry.data.role}</dd></div>}
+        {entry.data.tools && <div><dt>Tools</dt><dd>{entry.data.tools.join(' · ')}</dd></div>}
+        {entry.data.externalUrl && <div><dt>Link</dt><dd><a href={entry.data.externalUrl} rel="noreferrer" target="_blank">Open link <span aria-hidden="true">↗</span></a></dd></div>}
       </dl>
       <div class="case-study__cover">
         <Image

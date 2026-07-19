@@ -6,11 +6,12 @@ import PathTimeline from '@/components/signature/PathTimeline.astro';
 import CrossSection from '@/components/work/CrossSection.astro';
 import { FEATURES } from '@/config/features';
 import { getPathEvents } from '@/lib/path-events';
-import { getFeaturedWork } from '@/lib/work';
+import { getHomepageFeaturedWork } from '@/lib/work';
 import { withBase } from '@/lib/urls';
+import { PROFILE } from '@/config/profile';
 import profileImage from '@/assets/profile/quentin-rospars.jpg';
 
-const featuredWork = await getFeaturedWork(3);
+const featuredWork = await getHomepageFeaturedWork();
 const pathEvents = FEATURES.pathTimeline ? await getPathEvents() : [];
 ---
 
@@ -24,7 +25,6 @@ const pathEvents = FEATURES.pathTimeline ? await getPathEvents() : [];
           <p class="eyebrow eyebrow--accent">01 — A cross-section</p>
           <h2 id="selected-work-title">Selected work</h2>
         </div>
-        <a class="button" href={withBase('/work/')}>View all work <span aria-hidden="true">→</span></a>
       </header>
       <CrossSection items={featuredWork} />
     </div>
@@ -46,12 +46,11 @@ const pathEvents = FEATURES.pathTimeline ? await getPathEvents() : [];
       </div>
       <div class="home-about__copy" data-reveal>
         <p class="eyebrow eyebrow--accent">02 — About</p>
-        <h2 id="about-title">Art & coding</h2>
+        <h2 id="about-title">{PROFILE.homeAboutHeading}</h2>
         <div class="stack">
-          <p>I'm a french computer scientist working as a UX optimisation consultant for <a href="https://ecapacity.com/" rel="noreferrer" target="_blank">eCapacity</a>_<a href="https://www.valtech.com" rel="noreferrer" target="_blank">Valtech</a> in Copenhagen.</p>
-          <p>I always have been passionate about Art & Coding, and I try to link these two worlds in my work. My strongest skills are probably data visualization, UX optimization and web development.</p>
+          <p>{PROFILE.homeAbout}</p>
         </div>
-        <a class="button button--filled" href={withBase('/about/')}>More about me <span aria-hidden="true">→</span></a>
+        <a class="button" href={withBase('/about/')}>More about me <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>

@@ -11,7 +11,8 @@ const work = await getWorkIndex();
     <div class="container container--wide">
       <header class="work-page__header">
         <p class="eyebrow eyebrow--accent">Projects & visual practice</p>
-        <h1 id="work-title">Work</h1>
+        <h1 id="work-title" tabindex="-1" data-route-heading>Work</h1>
+        <p>Case studies and visual series, organised by project rather than chronology.</p>
       </header>
       <WorkIndex items={work} />
     </div>
@@ -36,5 +37,12 @@ const work = await getWorkIndex();
   .work-page__header h1 {
     margin: var(--space-2) 0 0;
     font-size: var(--step-5);
+  }
+
+  .work-page__header p:last-child {
+    grid-column: 1 / span 6;
+    max-width: 36rem;
+    margin: var(--space-5) 0 0;
+    color: var(--text-secondary);
   }
 </style>

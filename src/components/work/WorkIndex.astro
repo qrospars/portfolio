@@ -5,40 +5,60 @@ import { withBase } from '@/lib/urls';
 
 interface Props {
   items: WorkPreview[];
-  headingLevel?: 'h2' | 'h3';
+  headingLevel?: 'h3' | 'h4';
 }
 
-const { items, headingLevel: Heading = 'h2' } = Astro.props;
+const { items, headingLevel: Heading = 'h3' } = Astro.props;
+const groups = [
+  {
+    id: 'case-studies',
+    title: 'Case studies',
+    items: items.filter((item) => item.kind === 'Case study'),
+  },
+  {
+    id: 'visual-series',
+    title: 'Visual series',
+    items: items.filter((item) => item.kind === 'Visual series'),
+  },
+].filter((group) => group.items.length > 0);
 ---
 
 <div class="work-index" data-work-index>
   <div class="work-index__list">
-    {items.map((item, index) => (
-      <article class="work-row" data-work-row={item.id}>
-        <a href={withBase(item.href)}>
-          <span class="work-row__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <span class="work-row__main">
-            <span class="eyebrow eyebrow--accent">{item.kind}</span>
-            <Heading class="work-row__title">{item.title}</Heading>
-            <span class="work-row__summary">{item.summary}</span>
-          </span>
-          <span class="work-row__meta">
-            <span>{item.disciplineLabels.join(' · ')}</span>
-            {item.year && <span>{item.year}</span>}
-          </span>
-          <span class="work-row__arrow" aria-hidden="true">↗</span>
-          <span class="work-row__media">
-            <Image
-              src={item.image}
-              alt={item.imageAlt}
-              widths={[420, 720]}
-              sizes="(max-width: 52rem) calc(100vw - 2.5rem), 1px"
-              loading={index < 2 ? 'eager' : 'lazy'}
-              quality={82}
-            />
-          </span>
-        </a>
-      </article>
+    {groups.map((group) => (
+      <section class="work-index__group" aria-labelledby={group.id} data-work-group={group.id}>
+        <h2 id={group.id} class="work-index__group-title">{group.title}</h2>
+        {group.items.map((item) => {
+          const index = items.findIndex((candidate) => candidate.id === item.id);
+          return (
+            <article class="work-row" data-work-row={item.id}>
+              <a href={withBase(item.href)}>
+                <span class="work-row__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span class="work-row__main">
+                  <span class="eyebrow eyebrow--accent">{item.kind}</span>
+                  <Heading class="work-row__title">{item.title}</Heading>
+                  <span class="work-row__summary">{item.summary}</span>
+                </span>
+                <span class="work-row__meta">
+                  <span>{item.disciplineLabels.join(' · ')}</span>
+                  {item.year && <span>{item.year}</span>}
+                </span>
+                <span class="work-row__arrow" aria-hidden="true">↗</span>
+                <span class="work-row__media">
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt}
+                    widths={[420, 720]}
+                    sizes="(max-width: 52rem) calc(100vw - 2.5rem), 1px"
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                    quality={82}
+                  />
+                </span>
+              </a>
+            </article>
+          );
+        })}
+      </section>
     ))}
   </div>
   <aside class="work-index__previews" aria-hidden="true">
@@ -87,7 +107,23 @@ const { items, headingLevel: Heading = 'h2' } = Astro.props;
   }
 
   .work-index__list {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .work-index__group {
     border-top: 1px solid var(--border-default);
+  }
+
+  .work-index__group-title {
+    margin: 0;
+    padding-block: var(--space-4);
+    color: var(--text-muted);
+    font-family: var(--font-mono-stack);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .work-row {

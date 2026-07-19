@@ -1,13 +1,15 @@
 ---
 title: Maritime Traffic Tool
-summary: Explore the maritime traffic in the Abidjan's port.
+summary: A maritime traffic tool that turns difficult AIS data into an explorable map of Abidjan’s port.
 year: "2018"
 disciplines: [dataVisualization, dataStrategy]
 cover: ../../assets/work/artelia/cover.jpg
 coverAlt: Maritime traffic visualization over the port of Abidjan
 order: 10
-featured: true
-client: Artelia and Total groups
+featured: false
+client: Artelia and Total
+role: UX designer and developer
+tools: [D3.js, Mapbox, Leaflet, Python, BeautifulSoup]
 externalUrl: https://www.arteliagroup.com/en
 ---
 
@@ -19,21 +21,19 @@ import dashboardTwo from '../../assets/work/artelia/dashboard-2.png';
 import dashboardThree from '../../assets/work/artelia/dashboard-3.png';
 import dashboardFour from '../../assets/work/artelia/dashboard-4.png';
 
-In 2018, I developed a maritime traffic tool for Artelia and Total groups. They asked me to make in 3 months a complete tool that would analyse AIS data, turn it into a database and finally analyse it using a web-based application.
+The hard part was not drawing ships on a map. It was turning difficult AIS data into something a person could explore and trust. In 2018, I designed and developed a maritime traffic tool for Artelia and Total that analysed activity in Abidjan’s port.
 
-I used web technologies like d3.js for making charts and mapbox / leaflet to create the maps.
+I was responsible for the user experience and the build. Over three months, I turned raw maritime signals into a database and a web application, using D3.js for the visualisations and Mapbox and Leaflet for the map.
 
-<ProjectImage src={mapImage} alt="Maritime traffic map and analytical interface" />
+<ProjectImage src={mapImage} alt="Maritime traffic map and analytical interface" caption="The map brings vessel movements and the surrounding analytical interface into one view." />
 
-The database was created using web scraping techniques, where I gathered information on about 1300 ships on three different websites. I mostly used BeautifulSoup, a Python's library, to do the web scraping.
+The data source needed as much care as the interface. I used web scraping to gather information on roughly 1,300 ships from three sources, using BeautifulSoup to build a dataset that could be mapped correctly.
 
-<ProjectImage src={databaseImage} alt="Ship database interface created for the maritime traffic tool" />
+<ProjectImage src={databaseImage} alt="Ship database interface created for the maritime traffic tool" caption="The ship database connects the source data to the decisions a user can make in the interface." />
 
-I am really proud of the final result. The data visualizations created during this project still inspires me today, and I would love to design something more creative out of those. Due to confidentiality, I cannot elaborate further on the behind the scenes or the final purpose, but you will find some screenshots below:
+The visualisation challenge was making the data useful, not merely decorative. This project taught me a great deal about geodata, maritime traffic, and how an interface can surface insight from a complex system. Some details remain confidential, but these screens show the work that was possible to share.
 
-<ProjectImage src={dashboardOne} alt="Maritime traffic dashboard overview" />
-<ProjectImage src={dashboardTwo} alt="Maritime traffic distribution visualization" />
-<ProjectImage src={dashboardThree} alt="Maritime traffic analysis charts" />
-<ProjectImage src={dashboardFour} alt="Detailed vessel traffic visualization" />
-
-[Artelia Group](https://www.arteliagroup.com/en)
+<ProjectImage src={dashboardOne} alt="Maritime traffic dashboard overview" caption="A high-level view of maritime traffic activity." />
+<ProjectImage src={dashboardTwo} alt="Maritime traffic distribution visualization" caption="A distribution view that helps compare patterns across the dataset." />
+<ProjectImage src={dashboardThree} alt="Maritime traffic analysis charts" caption="Charts designed to move from vessel activity to a more specific question." />
+<ProjectImage src={dashboardFour} alt="Detailed vessel traffic visualization" caption="A detailed view for exploring a single part of the traffic picture." />

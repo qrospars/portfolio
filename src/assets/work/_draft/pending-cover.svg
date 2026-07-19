@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Draft case study cover placeholder">
+  <rect width="1600" height="1000" fill="#e9e6e0"/>
+  <path d="M0 680C240 470 420 860 650 610S1050 330 1600 550" fill="none" stroke="#b9323b" stroke-width="10" opacity=".45"/>
+  <text x="100" y="140" fill="#181817" font-family="monospace" font-size="34" letter-spacing="5">DRAFT CASE STUDY</text>
+</svg>

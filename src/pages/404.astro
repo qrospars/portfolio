@@ -6,7 +6,7 @@ import { withBase } from '@/lib/urls';
 <BaseLayout title="Page not found — Quentin Rospars" noindex>
   <section class="not-found container">
     <p class="eyebrow eyebrow--accent">404</p>
-    <h1>This path ends here.</h1>
+    <h1 tabindex="-1" data-route-heading>This path ends here.</h1>
     <a class="button button--filled" href={withBase('/')}>Return home</a>
   </section>
 </BaseLayout>

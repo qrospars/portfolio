@@ -1,30 +1,28 @@
 ---
 title: Muscle Fibers Finder
-summary: An image processing application to predict a drug efficiency.
+summary: An image-analysis application that identifies muscle-fibre striations to support drug-efficacy research.
+year: "2017"
 disciplines: [dataStrategy, aiAgents]
 cover: ../../assets/work/cytoo/cover.png
 coverAlt: SeekStries muscle fiber analysis application
 order: 40
 featured: false
 client: CYTOO
+context: University team project
+role: Team member, image analysis
+tools: [Python, LBP patterns, k-means]
 externalUrl: https://github.com/PierreBlancfat/SeekstriesCytoo
 ---
 
 import ProjectImage from '../../components/work/ProjectImage.astro';
 import striationImage from '../../assets/work/cytoo/striation-sample.jpg';
 
-CYTOO company asked me and some of my schoolmates at university to create an image processing tool to analyse many muscular fibers images at once, and find striations within.
+Muscle-fibre images are a technical place to start learning image analysis. During my studies, I worked with a university team on a tool for CYTOO that could analyse many muscle-fibre images and identify their striations.
 
-You can see an example of an image that they gave us below:
+It was my first real application of image analysis and traditional machine learning. We had one full-time month to work in a domain that was new to all of us, so the task was as much about learning how to approach the problem as it was about building the application.
 
-<ProjectImage src={striationImage} alt="Microscope image showing muscular fiber striations" />
+<ProjectImage src={striationImage} alt="Microscope image showing muscular fiber striations" caption="A microscopy image supplied for the project, where the fibre striations are the pattern the tool needed to identify." />
 
-We had one full-time month to develop it, and each one of us had specific tasks to accomplish.
+We built the interface in Python and used LBP patterns and k-means to recognise striations. The team then improved the approach with machine learning.
 
-We used Python to develop it, even for the graphic interface.
-
-I used LBP patterns and k-means algorithms to recognize striations inside the images, and it worked pretty well. We improved it using machine learning.
-
-You can find the github link below and clone it if you want to test the software:
-
-[https://github.com/PierreBlancfat/SeekstriesCytoo](https://github.com/PierreBlancfat/SeekstriesCytoo)
+The project opened my mind to the range of problems image analysis can help solve. It also gave me a practical foundation for thinking about models as part of a usable application, not just an isolated technical exercise.

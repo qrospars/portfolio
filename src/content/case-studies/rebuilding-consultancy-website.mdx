@@ -1,0 +1,38 @@
+---
+title: Rebuilding a Consultancy Website in 15 Days
+summary: A full consultancy site, from positioning and component library to a working AI chat, rebuilt in-house in two weeks.
+year: "2026"
+disciplines: [productUx, aiAgents, cro]
+cover: ../../assets/work/rebuilding-consultancy-website/dear-future-homepage.jpeg
+coverAlt: Dear Future homepage with the message “The AI hype is real. The results should be too.”
+order: 200
+featured: true
+draft: false
+client: Dear Future
+role: Project lead
+tools: [Claude Design, Lovable, Claude Code, TanStack Start, Tailwind, Supabase, Cloudflare]
+externalUrl: https://dearfuture.dk
+---
+
+import ProjectImage from '../../components/work/ProjectImage.astro';
+import dearBotImage from '../../assets/work/rebuilding-consultancy-website/dear-bot.png';
+import aboutImage from '../../assets/work/rebuilding-consultancy-website/dear-future-about.png';
+import articlesImage from '../../assets/work/rebuilding-consultancy-website/dear-future-articles.png';
+
+The interesting part was never the speed. We rebuilt the full Dear Future website in fifteen days, in-house: positioning, services, case stories, a component library, and a working AI chat. The work had once taken a quarter, but the real change was making the site something we could own and evolve ourselves.
+
+We did not start from a blank visual language. We reused the established colours, fonts, and selected design elements, then used Claude Design to make a quick, polished prototype that could guide the build. I led the project and owned the homepage, contact, navigation, footer, and analytics.
+
+The speed depended on preparation. I implemented the prototype mostly with Claude, but the useful part was the structure around it: Claude.md files, strict guidelines, a defined design system, and an architecture that made collaboration legible for both the team and the agent. Without that, a fast build would have recreated the maintenance problem we were trying to solve.
+
+We launched as soon as the site was ready, reusing a small set of articles and case studies from the previous website. In less than a month after launch, the new website brought in six leads. The old site had generated none in the previous six months. It is still early, but it is a useful signal that clarity and a site a team can keep improving are connected.
+
+<ProjectImage src={dearBotImage} alt="Dear Bot, the Dear Future website chatbot, open with its welcome message and text input" caption="The working AI chat gives visitors a way to ask about the consultancy, its work, roles, and events." />
+
+We also built Dear Bot, a custom-coded chat agent. Because it lives inside the site, it can reuse its design elements, display forms and other web components directly in the conversation, and change with the rest of the experience. It took a few days to develop, rather than becoming a separate tool with its own visual rules.
+
+<ProjectImage src={aboutImage} alt="Dear Future About section with company history, statistics, and a Copenhagen building photograph" caption="The About section gives the new direction a concrete history, rather than treating a rebrand as a blank slate." />
+
+The real win is that change is now ordinary. We created a Claude onboarding project so someone can clone and update the site when needed, and made a governance plan so it does not become a mess. I also wrote the article that turned the project into a point of view on what AI actually changes in how teams work. The process was fun and smooth, which matters. It replaced the frustrating process we had before, and potential clients seem happy with what they find when they arrive.
+
+<ProjectImage src={articlesImage} alt="Dear Future articles section showing three AI and data articles" caption="The articles section makes the consultancy's thinking part of the site, not an afterthought." />

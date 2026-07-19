@@ -6,7 +6,6 @@ import { withBase } from '@/lib/urls';
   <div class="container container--wide site-footer__inner">
     <div class="site-footer__invitation">
       <p class="eyebrow eyebrow--accent">Contact</p>
-      <p class="site-footer__title">If you think I am someone interesting to talk to, don't hesitate to send me an email.</p>
       <a class="site-footer__email" href="mailto:rospars.quentin@outlook.com">rospars.quentin@outlook.com <span aria-hidden="true">↗</span></a>
     </div>
     <div class="site-footer__bottom">
@@ -45,18 +44,13 @@ import { withBase } from '@/lib/urls';
     align-items: start;
   }
 
-  .site-footer__title {
-    max-width: 58rem;
-    margin: 0;
-    font-family: var(--font-display-stack);
-    font-size: var(--step-3);
-    line-height: 1.05;
-  }
-
   .site-footer__email {
-    grid-column: 2;
     width: fit-content;
-    font-size: var(--step-0);
+    color: var(--color-white);
+    font-family: var(--font-display-stack);
+    font-size: var(--step-2);
+    line-height: 1.1;
+    text-decoration-thickness: 1px;
   }
 
   .site-footer__bottom {
@@ -80,11 +74,6 @@ import { withBase } from '@/lib/urls';
   @media (max-width: 42rem) {
     .site-footer__invitation {
       grid-template-columns: 1fr;
-    }
-
-    .site-footer__email {
-      grid-column: 1;
-      overflow-wrap: anywhere;
     }
 
     .site-footer__bottom {

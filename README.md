@@ -15,6 +15,11 @@ The development server always uses `http://localhost:4321/portfolio/` and hot-re
 the page as files change. If port `4321` is already occupied, it exits with an error
 instead of silently starting on a different port.
 
+`npm run clean` only removes generated reports and production output, so it is safe
+while developing. If Astro's generated content cache needs resetting, stop the dev
+server first, then run `npm run dev:reset`; never remove `.astro/` while the server is
+running.
+
 ## Validation
 
 ```bash

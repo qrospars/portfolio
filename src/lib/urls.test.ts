@@ -6,6 +6,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.re
 describe('base-aware route helpers', () => {
   it('normalizes internal paths and preserves queries and hashes', () => {
     expect(withBase('work')).toMatch(/\/work\/$/);
+    expect(withBase('/contact/')).toMatch(/\/contact\/$/);
     expect(withBase('/work/?view=all#latest')).toMatch(/\/work\/\?view=all#latest$/);
   });
 

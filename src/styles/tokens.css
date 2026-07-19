@@ -8,7 +8,7 @@
   --color-ink-soft: #56544f;
   --color-muted: #6f6b64;
   --color-line: #d9d6ce;
-  --color-coral: #c83c45;
+  --color-coral: #b9323b;
   --color-coral-soft: #f2a2a6;
   --color-blush: #f8e5e3;
   --color-dark: #151515;
@@ -56,7 +56,7 @@
   --radius-small: 0.3rem;
   --radius-medium: 0.75rem;
   --radius-large: 1.25rem;
-  --radius-round: 999px;
+  --radius-control: 0.2rem;
 
   --border-thin: 1px;
   --border-strong: 2px;

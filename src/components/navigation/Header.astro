@@ -3,8 +3,10 @@ import { isRouteActive, withBase } from '@/lib/urls';
 
 const pathname = Astro.url.pathname;
 const navigation = [
+  { label: 'Home', href: '/' },
   { label: 'Work', href: '/work/' },
   { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 ---
 
@@ -17,7 +19,6 @@ const navigation = [
     {navigation.map((item) => (
       <a href={withBase(item.href)} aria-current={isRouteActive(pathname, item.href) ? 'page' : undefined}>{item.label}</a>
     ))}
-    <a href="mailto:rospars.quentin@outlook.com">Contact</a>
   </nav>
 </header>
 
@@ -30,16 +31,27 @@ const navigation = [
     if (!toggle || !nav) return;
 
     header.dataset.ready = 'true';
-    toggle.addEventListener('click', () => {
+    const updateScrollState = () => header.toggleAttribute('data-scrolled', window.scrollY > 24);
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    const onToggle = () => {
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!expanded));
       nav.toggleAttribute('data-open', !expanded);
-    });
-    nav.addEventListener('click', (event) => {
+    };
+    const onNavigationClick = (event: Event) => {
       if (!(event.target instanceof HTMLAnchorElement)) return;
       toggle.setAttribute('aria-expanded', 'false');
       nav.removeAttribute('data-open');
-    });
+    };
+    const cleanup = () => {
+      window.removeEventListener('scroll', updateScrollState);
+      toggle.removeEventListener('click', onToggle);
+      nav.removeEventListener('click', onNavigationClick);
+    };
+    toggle.addEventListener('click', onToggle);
+    nav.addEventListener('click', onNavigationClick);
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
   }
   document.addEventListener('astro:page-load', initializeNavigation);
   initializeNavigation();
@@ -47,7 +59,7 @@ const navigation = [
 
 <style>
   .site-header {
-    position: absolute;
+    position: fixed;
     z-index: var(--z-header);
     top: 0;
     left: 0;
@@ -57,7 +69,16 @@ const navigation = [
     justify-content: space-between;
     gap: var(--space-6);
     padding: clamp(1.25rem, 2.5vw, 2.5rem) var(--gutter);
+    border-bottom: 1px solid transparent;
     pointer-events: none;
+    transition: background var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out), padding var(--duration-base) var(--ease-out);
+  }
+
+  .site-header[data-scrolled] {
+    padding-block: var(--space-4);
+    border-color: var(--border-default);
+    background: color-mix(in srgb, var(--color-paper) 94%, transparent);
+    backdrop-filter: blur(12px);
   }
 
   .site-header a,

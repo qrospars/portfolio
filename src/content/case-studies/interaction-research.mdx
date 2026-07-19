@@ -1,12 +1,15 @@
 ---
-title: What do we mean by interaction?
-summary: A visual exploration of a century of Human-Computer Interaction.
+title: HCI Research Explorer
+summary: An academic research explorer that makes Human-Computer Interaction studies easier to navigate and compare.
 year: "2019"
 disciplines: [dataVisualization, userResearch, productUx]
 cover: ../../assets/work/pocs/cover.png
 coverAlt: Interface for exploring Human-Computer Interaction research papers
 order: 30
 featured: false
+context: Academic project using a confidential research dataset
+role: Researcher and developer
+tools: [React, D3.js, Python, JSON, OAuth]
 ---
 
 import ProjectImage from '../../components/work/ProjectImage.astro';
@@ -15,17 +18,17 @@ import paperImage from '../../assets/work/pocs/paper-view.png';
 import detailsImage from '../../assets/work/pocs/details.png';
 import explorationImage from '../../assets/work/pocs/exploration.png';
 
-In 2019, I developed a web application allowing the user to explore a dataset of the last 35 years of research papers in the field of Human-Computer Interaction. It took me 6 months to make it.
+Research papers are full of useful connections, but they are difficult to explore one document at a time. In 2019, during my studies, I built an academic research explorer around a confidential dataset of Human-Computer Interaction papers.
 
-I used technologies such as React and D3 to make it. Making it taught me a lot about User Experience design within a web app development.
+I worked through the studies with traditional NLP techniques, then built a complete website that let people move between the wider dataset and individual papers. React and D3.js gave the interface its structure and visual language.
 
-<ProjectImage src={coverImage} alt="Overview of the Human-Computer Interaction research explorer" />
+<ProjectImage src={coverImage} alt="Overview of the Human-Computer Interaction research explorer" caption="The explorer starts with a broad view, so a reader can decide where to look before opening a paper." />
 
-It was text-related data, so I had to find meaningful ways of representing that type of data. But also give powerful exploration tools to the user. For example, the user can analyze the dataset in its whole or at a paper-level. I used Python for data cleaning and Javascript (JSON objects) for making the objects that D3 will use to make the graphs.
+Text-based research data does not naturally become a useful visual system. I cleaned it with Python and prepared JSON objects for D3, then designed exploration tools that could work at both dataset and paper level. The visualisation work was the part I enjoyed most, because the interface made the research genuinely fun to explore.
 
-<ProjectImage src={paperImage} alt="Paper-level view in the research explorer" />
+<ProjectImage src={paperImage} alt="Paper-level view in the research explorer" caption="A paper-level view keeps the detail connected to the patterns visible across the full collection." />
 
-I also implemented an OAuth connexion system to give the website's access only to a few people since the dataset is confidential.
+Because the dataset was confidential, I also implemented OAuth access control so the right people could use the explorer without exposing the underlying research.
 
-<ProjectImage src={detailsImage} alt="Detailed research paper visualization" />
-<ProjectImage src={explorationImage} alt="Exploration tools for the Human-Computer Interaction dataset" />
+<ProjectImage src={detailsImage} alt="Detailed research paper visualization" caption="A detailed visual view helps turn a paper into something that can be compared, not just read in isolation." />
+<ProjectImage src={explorationImage} alt="Exploration tools for the Human-Computer Interaction dataset" caption="The exploration controls let users follow their own questions through the research." />
